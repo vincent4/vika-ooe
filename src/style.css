@@ -869,7 +869,7 @@ body {
 
 .showcase-item .showcase-visual {
   width: 100%;
-  max-width: 18rem;
+  max-width: 20rem;
   margin-inline: auto;
 }
 
@@ -890,9 +890,9 @@ body {
 }
 
 .showcase-item .showcase-copy {
-  font-size: 0.98rem;
+  font-size: 1.04rem;
   text-align: left;
-  max-width: 24ch;
+  max-width: 30ch;
   margin-inline: auto;
 }
 
