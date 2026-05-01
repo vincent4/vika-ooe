@@ -800,13 +800,13 @@ body {
   border-radius: var(--radius);
   overflow: hidden;
   background: #ebe6df;
-  max-width: min(100%, 15rem);
+  max-width: min(100%, 12rem);
   margin-inline: auto;
 }
 
 @media (min-width: 520px) {
   .feature-card:has(.feat-img) .feat-img {
-    max-width: min(100%, 14rem);
+    max-width: min(100%, 11rem);
     margin-inline: auto;
   }
 }
@@ -869,7 +869,7 @@ body {
 
 .showcase-item .showcase-visual {
   width: 100%;
-  max-width: 18rem;
+  max-width: 14rem;
   margin-inline: auto;
 }
 
@@ -885,9 +885,7 @@ body {
 .showcase-visual img {
   width: 100%;
   max-width: 100%;
-  aspect-ratio: 4 / 5;
   height: auto;
-  object-fit: cover;
   display: block;
 }
 
