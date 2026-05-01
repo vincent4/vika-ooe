@@ -869,13 +869,13 @@ body {
 
 .showcase-item .showcase-visual {
   width: 100%;
-  max-width: 20rem;
+  max-width: 22rem;
   margin-inline: auto;
 }
 
 .showcase-visual a {
   display: block;
-  border-radius: calc(var(--radius) + 4px);
+  border-radius: 0;
   overflow: hidden;
   line-height: 0;
   box-shadow: var(--shadow);
