@@ -599,7 +599,7 @@ body {
 
 /* ——— Intro ——— */
 .intro {
-  padding: var(--page-pad-y) 0;
+  padding: var(--page-pad-y) 0 calc(var(--page-pad-y) * 0.5);
   background: var(--color-bg);
 }
 
@@ -627,6 +627,10 @@ body {
 /* ——— Sections ——— */
 .section {
   padding: var(--page-pad-y) 0;
+}
+
+.section#broderier {
+  padding-top: calc(var(--page-pad-y) * 0.5);
 }
 
 .section-head {
