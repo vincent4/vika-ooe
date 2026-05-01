@@ -30,13 +30,18 @@ updateHeaderScroll();
 
 const navToggle = document.querySelector(".nav-toggle");
 const nav = document.getElementById("site-nav");
-const mqMobileNav = window.matchMedia("(max-width: 900px)");
+
+/** Sand synlig hamburger — matcher CSS (display:none vs flex), ikke kun matchMedia */
+function isHamburgerNav() {
+  return Boolean(navToggle && getComputedStyle(navToggle).display !== "none");
+}
 
 function resetGarnSubnav() {
   if (!nav) return;
   nav.querySelectorAll(".nav-primary > li.is-subnav-open").forEach((li) => {
     li.classList.remove("is-subnav-open");
-    li.querySelector(":scope > .nav-subnav-trigger")?.setAttribute("aria-expanded", "false");
+    const trig = li.querySelector(":scope > .nav-subnav-trigger");
+    if (trig) trig.setAttribute("aria-expanded", "false");
   });
 }
 
@@ -57,20 +62,23 @@ if (navToggle && nav) {
     if (!open) resetGarnSubnav();
   });
 
-  nav.querySelectorAll(".nav-subnav-trigger").forEach((btn) => {
-    btn.addEventListener("click", () => {
-      if (!mqMobileNav.matches()) return;
-      const li = btn.closest(".nav-primary > li");
-      const wasOpen = li.classList.contains("is-subnav-open");
-      nav.querySelectorAll(".nav-primary > li.is-subnav-open").forEach((openLi) => {
-        if (openLi !== li) {
-          openLi.classList.remove("is-subnav-open");
-          openLi.querySelector(":scope > .nav-subnav-trigger")?.setAttribute("aria-expanded", "false");
-        }
-      });
-      li.classList.toggle("is-subnav-open", !wasOpen);
-      btn.setAttribute("aria-expanded", !wasOpen ? "true" : "false");
+  nav.addEventListener("click", (e) => {
+    if (!isHamburgerNav()) return;
+    const raw = e.target;
+    const el = raw instanceof Element ? raw : raw.parentElement;
+    const btn = el?.closest(".nav-subnav-trigger");
+    if (!btn || !nav.contains(btn)) return;
+    const li = btn.closest(".nav-primary > li");
+    if (!li) return;
+    const wasOpen = li.classList.contains("is-subnav-open");
+    nav.querySelectorAll(".nav-primary > li.is-subnav-open").forEach((openLi) => {
+      if (openLi !== li) {
+        openLi.classList.remove("is-subnav-open");
+        openLi.querySelector(":scope > .nav-subnav-trigger")?.setAttribute("aria-expanded", "false");
+      }
     });
+    li.classList.toggle("is-subnav-open", !wasOpen);
+    btn.setAttribute("aria-expanded", !wasOpen ? "true" : "false");
   });
 
   nav.querySelectorAll("a").forEach((link) => {
@@ -79,7 +87,7 @@ if (navToggle && nav) {
     });
   });
 
-  mqMobileNav.addEventListener("change", () => {
-    if (!mqMobileNav.matches()) resetGarnSubnav();
-  });
+  window.addEventListener("resize", () => {
+    if (!isHamburgerNav()) resetGarnSubnav();
+  }, { passive: true });
 }

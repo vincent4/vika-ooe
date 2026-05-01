@@ -372,9 +372,14 @@ body {
 }
 
 @media (min-width: 901px) {
-  /* Undermenu først ved hover på knappen, eller mens musen er i dropdown / tastaturfokus i gruppen */
+  /* Undermenu ved hover på knap / dropdown; :has() i egen regel så ældre browsere ikke dropper hele blokken */
   .nav-primary .nav-subnav-trigger:hover + .subnav,
-  .nav-primary .subnav:hover,
+  .nav-primary .subnav:hover {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+
   .nav-primary > li:has(.nav-subnav-trigger):focus-within .subnav {
     opacity: 1;
     visibility: visible;
@@ -525,6 +530,9 @@ body {
 
   .nav-primary .nav-subnav-trigger {
     width: 100%;
+    touch-action: manipulation;
+    position: relative;
+    z-index: 2;
   }
 
   .nav-primary .subnav {
@@ -563,6 +571,8 @@ body {
     margin-bottom: 0.15rem;
     padding: 0.4rem 0.5rem 0.4rem 0.75rem;
     overflow: visible;
+    position: relative;
+    z-index: 1;
   }
 
   .nav-primary .subnav li {
