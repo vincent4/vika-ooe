@@ -891,7 +891,9 @@ body {
 
 .showcase-item .showcase-copy {
   font-size: 0.98rem;
-  text-align: center;
+  text-align: left;
+  max-width: 24ch;
+  margin-inline: auto;
 }
 
 .showcase-copy p {
