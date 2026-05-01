@@ -659,7 +659,7 @@ body {
   flex-wrap: wrap;
   justify-content: center;
   align-items: flex-start;
-  gap: clamp(1rem, 2.5vw, 1.75rem);
+  gap: clamp(1.5rem, 3.5vw, 2.5rem);
 }
 
 .product-card {
@@ -762,7 +762,7 @@ body {
 /* ——— Feature / Se også ——— */
 .feature-grid {
   display: grid;
-  gap: clamp(1rem, 2.5vw, 1.75rem);
+  gap: clamp(1.5rem, 3.5vw, 2.5rem);
   grid-template-columns: 1fr;
 }
 
@@ -774,7 +774,7 @@ body {
 
 @media (min-width: 1200px) {
   .feature-grid {
-    gap: 1.75rem 2.25rem;
+    gap: 2.25rem 3rem;
   }
 }
 
@@ -847,14 +847,14 @@ body {
 .showcase-row {
   display: grid;
   grid-template-columns: 1fr;
-  gap: clamp(1.75rem, 4vw, 2.5rem);
+  gap: clamp(2.25rem, 5vw, 3.25rem);
   align-items: start;
 }
 
 @media (min-width: 900px) {
   .showcase-row {
     grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: clamp(1rem, 2.5vw, 2rem);
+    gap: clamp(1.75rem, 3.5vw, 2.75rem);
   }
 }
 
