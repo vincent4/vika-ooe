@@ -615,9 +615,9 @@ body {
 .intro .lead {
   margin: 0;
   max-width: 100%;
-  font-size: clamp(1.05rem, 2.5vw, 1.2rem);
+  font-size: clamp(0.98rem, 2.1vw, 1.08rem);
   color: var(--color-muted);
-  line-height: 1.65;
+  line-height: 1.5;
   hyphens: auto;
   -webkit-hyphens: auto;
   overflow-wrap: break-word;
