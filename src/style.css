@@ -622,7 +622,14 @@ body {
   -webkit-hyphens: auto;
   overflow-wrap: break-word;
   word-break: normal;
-  text-wrap: pretty;
+}
+
+.intro .lead p {
+  margin: 0;
+}
+
+.intro .lead p + p {
+  margin-top: 1.6em;
 }
 
 /* ——— Sections ——— */
