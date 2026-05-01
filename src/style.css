@@ -7,8 +7,8 @@
   --color-accent-hover: #542f3a;
   --color-forest: #2f4d44;
   --color-border: #e2dcd2;
-  --font-body: "Source Sans 3", system-ui, sans-serif;
-  --font-display: "Cormorant Garamond", Georgia, serif;
+  --font-body: "Roboto", system-ui, sans-serif;
+  --font-display: "Roboto", system-ui, sans-serif;
   --radius: 10px;
   --shadow: 0 8px 32px rgba(42, 38, 34, 0.08);
   --header-h: 4.25rem;
