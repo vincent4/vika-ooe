@@ -617,19 +617,11 @@ body {
   max-width: 100%;
   font-size: clamp(1.05rem, 2.5vw, 1.2rem);
   color: var(--color-muted);
-  line-height: 1.6;
+  line-height: 1.65;
   hyphens: auto;
   -webkit-hyphens: auto;
   overflow-wrap: break-word;
   word-break: normal;
-}
-
-.intro .lead p {
-  margin: 0;
-}
-
-.intro .lead p + p {
-  margin-top: 1.15em;
 }
 
 /* ——— Sections ——— */
