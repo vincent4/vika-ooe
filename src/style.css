@@ -500,24 +500,33 @@ body {
   color: var(--color-forest);
 }
 
-/* ——— Showcase wide ——— */
-.showcase-grid {
+/* ——— Showcase (dyr / større format) — én række, tekst under billede ——— */
+.showcase-row {
   display: grid;
-  gap: clamp(1.25rem, 3vw, 2rem);
+  grid-template-columns: 1fr;
+  gap: clamp(1.75rem, 4vw, 2.5rem);
+  align-items: start;
 }
 
-@media (min-width: 800px) {
-  .showcase-grid {
-    grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
-    align-items: center;
+@media (min-width: 900px) {
+  .showcase-row {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: clamp(1rem, 2.5vw, 2rem);
   }
 }
 
-.showcase-visual {
+.showcase-item {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(0.85rem, 2vw, 1.15rem);
+  min-width: 0;
+  margin: 0;
+}
+
+.showcase-item .showcase-visual {
   width: 100%;
-  max-width: min(100%, 38rem);
-  margin-inline: auto;
-  justify-self: center;
+  max-width: none;
+  margin-inline: 0;
 }
 
 .showcase-visual a {
@@ -536,19 +545,22 @@ body {
   display: block;
 }
 
+.showcase-item .showcase-copy {
+  font-size: 0.98rem;
+  text-align: center;
+}
+
 .showcase-copy p {
-  margin: 0 0 0.75rem;
+  margin: 0 0 0.65rem;
   color: var(--color-muted);
+}
+
+.showcase-copy p:last-child {
+  margin-bottom: 0;
 }
 
 .showcase-copy em {
   color: var(--color-text);
-}
-
-.showcase-block + .showcase-block {
-  margin-top: 2.5rem;
-  padding-top: 2.5rem;
-  border-top: 1px dashed var(--color-border);
 }
 
 /* ——— Contact ——— */
