@@ -317,6 +317,7 @@ body {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  align-items: flex-start;
   gap: clamp(1rem, 2.5vw, 1.75rem);
 }
 
@@ -341,8 +342,6 @@ body {
 }
 
 .product-card .thumb {
-  position: relative;
-  aspect-ratio: 1;
   background: #ebe6df;
   overflow: hidden;
 }
@@ -350,20 +349,18 @@ body {
 .product-card .thumb a {
   display: block;
   width: 100%;
-  height: 100%;
   line-height: 0;
   cursor: zoom-in;
 }
 
 .product-card .thumb img {
+  display: block;
   width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: transform 0.35s ease;
+  height: auto;
 }
 
 .product-card:hover .thumb img {
-  transform: scale(1.04);
+  opacity: 0.96;
 }
 
 .product-card .body {
@@ -459,14 +456,13 @@ body {
   border-radius: var(--radius);
   overflow: hidden;
   background: #ebe6df;
-  aspect-ratio: 1;
   max-width: min(100%, 15rem);
   margin-inline: auto;
 }
 
 @media (min-width: 520px) {
   .feature-card:has(.feat-img) .feat-img {
-    max-width: min(100%, 11rem);
+    max-width: min(100%, 14rem);
     margin-inline: auto;
   }
 }
@@ -478,9 +474,9 @@ body {
 }
 
 .feature-card .feat-img img {
+  display: block;
   width: 100%;
-  height: 100%;
-  object-fit: cover;
+  height: auto;
 }
 
 .feature-card h3 {
