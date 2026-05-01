@@ -370,6 +370,24 @@ body {
   box-sizing: border-box;
 }
 
+.nav-subnav-trigger-row {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.3rem;
+}
+
+.nav-subnav-trigger-text {
+  display: inline;
+}
+
+@media (min-width: 901px) {
+  .nav-subnav-trigger-hint,
+  .nav-subnav-chevron {
+    display: none;
+  }
+}
+
 .nav-primary a:hover,
 .nav-primary a:focus-visible,
 .nav-primary .nav-subnav-trigger:hover,
@@ -520,6 +538,42 @@ body {
 
   .nav-primary .nav-subnav-trigger {
     width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.2rem;
+  }
+
+  .nav-subnav-trigger-row {
+    gap: 0.4rem;
+  }
+
+  .nav-subnav-chevron {
+    display: block;
+    width: 1.125rem;
+    height: 1.125rem;
+    flex-shrink: 0;
+    opacity: 0.72;
+    transition: transform 0.25s ease;
+  }
+
+  .nav-primary > li.is-subnav-open .nav-subnav-chevron {
+    transform: rotate(180deg);
+  }
+
+  .nav-subnav-trigger-hint {
+    display: block;
+    font-size: 0.8125rem;
+    font-weight: 500;
+    line-height: 1.35;
+    color: var(--color-muted);
+    opacity: 0.9;
+    max-width: 100%;
+  }
+
+  .nav-primary > li.is-subnav-open .nav-subnav-trigger-hint {
+    display: none;
   }
 
   /* Undermenu kun ved klik (.is-subnav-open), ikke hover/focus — undgå auto-åben på touch */
@@ -539,16 +593,19 @@ body {
     visibility: hidden;
     max-height: 0;
     margin-top: 0;
-    padding: 0 0.35rem;
+    padding: 0 0 0 0.65rem;
     overflow: hidden;
     transform: none;
     box-shadow: none;
     border: none;
-    background: rgba(47, 77, 68, 0.06);
-    margin-inline: auto;
-    width: fit-content;
+    border-left: 3px solid var(--color-forest);
+    border-radius: 0 var(--radius) var(--radius) 0;
+    background: rgba(47, 77, 68, 0.07);
+    margin-inline: 0;
+    width: 100%;
     max-width: 100%;
     text-align: center;
+    box-sizing: border-box;
     transition:
       max-height 0.28s ease,
       opacity 0.2s ease,
@@ -562,13 +619,19 @@ body {
   .nav-primary > li.is-subnav-open:focus-within .subnav {
     opacity: 1;
     visibility: visible;
-    max-height: 10rem;
-    margin-top: 0.25rem;
-    padding: 0.35rem;
+    max-height: 12rem;
+    margin-top: 0.35rem;
+    padding: 0.4rem 0.5rem 0.4rem 0.75rem;
   }
 
   .nav-primary .subnav li {
     text-align: center;
+  }
+
+  .nav-primary .subnav li + li {
+    margin-top: 0.15rem;
+    padding-top: 0.15rem;
+    border-top: 1px solid rgba(47, 77, 68, 0.12);
   }
 
   .nav-primary a,
@@ -579,6 +642,7 @@ body {
 
   .nav-primary .subnav a {
     font-size: 1.0625rem;
+    font-weight: 600;
   }
 }
 
