@@ -7,7 +7,9 @@
     "dev": "vite",
     "start": "vite",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "deploy": "npx vercel@latest --prod",
+    "deploy:preview": "npx vercel@latest"
   },
   "devDependencies": {
     "vite": "^6.3.5"
