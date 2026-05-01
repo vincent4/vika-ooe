@@ -666,9 +666,9 @@ body {
 .product-card {
   display: flex;
   flex-direction: column;
-  flex: 0 1 22.5rem;
+  flex: 0 1 18rem;
   width: 100%;
-  max-width: 22.5rem;
+  max-width: 18rem;
   min-width: 0;
   background: var(--color-surface);
   border: 1px solid var(--color-border);
@@ -686,6 +686,7 @@ body {
 .product-card .thumb {
   background: #ebe6df;
   overflow: hidden;
+  aspect-ratio: 4 / 5;
 }
 
 .product-card .thumb a {
@@ -698,7 +699,8 @@ body {
 .product-card .thumb img {
   display: block;
   width: 100%;
-  height: auto;
+  height: 100%;
+  object-fit: cover;
 }
 
 .product-card:hover .thumb img {
@@ -867,8 +869,8 @@ body {
 
 .showcase-item .showcase-visual {
   width: 100%;
-  max-width: none;
-  margin-inline: 0;
+  max-width: 21rem;
+  margin-inline: auto;
 }
 
 .showcase-visual a {
@@ -883,7 +885,9 @@ body {
 .showcase-visual img {
   width: 100%;
   max-width: 100%;
+  aspect-ratio: 4 / 5;
   height: auto;
+  object-fit: cover;
   display: block;
 }
 
