@@ -97,8 +97,8 @@ body {
   background: rgba(42, 38, 34, 0.52);
   border-bottom-color: rgba(255, 255, 255, 0.12);
   box-shadow: 0 6px 24px rgba(0, 0, 0, 0.06);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
+  /* Ingen backdrop-filter her: det gør header til containing block og ødelægger
+     position:fixed-mobilmenuen (panel bliver klemt inde i header-højden). */
 }
 
 .site-header.is-scrolled .brand,
@@ -409,15 +409,24 @@ body {
   }
 
   .nav-wrap {
-    flex: 0 0 0;
-    width: 0;
-    height: 0;
+    flex: none;
+    position: fixed;
+    top: var(--header-h);
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    z-index: 150;
     margin: 0;
     padding: 0;
     overflow: visible;
-    position: relative;
+    pointer-events: none;
     grid-column: unset;
     justify-self: unset;
+  }
+
+  body.nav-open .nav-wrap {
+    pointer-events: auto;
   }
 
   .header-end {
@@ -450,8 +459,10 @@ body {
   }
 
   .nav-primary {
-    position: fixed;
-    inset: var(--header-h) 0 0 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
     flex-direction: column;
     align-items: stretch;
     gap: 0;
@@ -459,6 +470,7 @@ body {
       max(var(--page-pad-x), env(safe-area-inset-left, 0px));
     background: var(--color-bg);
     border-bottom: 1px solid var(--color-border);
+    box-shadow: 0 12px 32px rgba(42, 38, 34, 0.12);
     transform: translateY(-100%);
     opacity: 0;
     visibility: hidden;
@@ -467,7 +479,7 @@ body {
       opacity 0.25s ease,
       visibility 0.25s;
     overflow-y: auto;
-    max-height: calc(100vh - var(--header-h));
+    max-height: calc(100dvh - var(--header-h));
   }
 
   body.nav-open .nav-primary {
