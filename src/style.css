@@ -94,11 +94,11 @@ body {
 }
 
 .site-header.is-scrolled {
-  background: rgba(42, 38, 34, 0.76);
-  border-bottom-color: rgba(255, 255, 255, 0.1);
-  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.08);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  background: rgba(42, 38, 34, 0.52);
+  border-bottom-color: rgba(255, 255, 255, 0.12);
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.06);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
 }
 
 .site-header.is-scrolled .brand,
@@ -242,8 +242,25 @@ body {
 }
 
 .lang-flag {
-  font-size: 1.2rem;
-  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 0;
+}
+
+.lang-flag-svg {
+  display: block;
+  width: 1.5rem;
+  height: auto;
+  max-height: 1.05rem;
+  border-radius: 2px;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.14);
+}
+
+.site-header.is-scrolled .lang-flag-svg {
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.35),
+    0 1px 3px rgba(0, 0, 0, 0.2);
 }
 
 .lang-link:hover,
@@ -415,8 +432,9 @@ body {
     height: 2rem;
   }
 
-  .lang-flag {
-    font-size: 1.05rem;
+  .lang-flag-svg {
+    width: 1.35rem;
+    max-height: 0.95rem;
   }
 
   .header-instagram {
