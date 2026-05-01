@@ -516,7 +516,7 @@ body {
 
 .intro .lead {
   margin: 0;
-  max-width: min(90ch, 100%);
+  max-width: 100%;
   font-size: clamp(1.05rem, 2.5vw, 1.2rem);
   color: var(--color-muted);
   line-height: 1.6;
