@@ -386,6 +386,13 @@ body {
   .nav-subnav-chevron {
     display: none;
   }
+
+  .nav-primary li:hover .subnav,
+  .nav-primary li:focus-within .subnav {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
 }
 
 .nav-primary a:hover,
@@ -415,13 +422,6 @@ body {
     opacity 0.2s,
     visibility 0.2s,
     transform 0.2s;
-}
-
-.nav-primary li:hover .subnav,
-.nav-primary li:focus-within .subnav {
-  opacity: 1;
-  visibility: visible;
-  transform: translateY(0);
 }
 
 .nav-primary .subnav a {
@@ -574,17 +574,6 @@ body {
 
   .nav-primary > li.is-subnav-open .nav-subnav-trigger-hint {
     display: none;
-  }
-
-  /* Undermenu kun ved klik (.is-subnav-open), ikke hover/focus — undgå auto-åben på touch */
-  .nav-primary li:hover .subnav,
-  .nav-primary li:focus-within .subnav {
-    opacity: 0;
-    visibility: hidden;
-    max-height: 0;
-    margin-top: 0;
-    padding-block: 0;
-    overflow: hidden;
   }
 
   .nav-primary .subnav {
