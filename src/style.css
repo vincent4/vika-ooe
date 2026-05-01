@@ -112,14 +112,12 @@ body {
 
 @media (min-width: 901px) {
   .site-header.is-scrolled .nav-primary a,
-  .site-header.is-scrolled .nav-primary .nav-subnav-trigger {
+  .site-header.is-scrolled .nav-primary .nav-subnav-label {
     color: rgba(245, 242, 235, 0.88);
   }
 
   .site-header.is-scrolled .nav-primary a:hover,
-  .site-header.is-scrolled .nav-primary a:focus-visible,
-  .site-header.is-scrolled .nav-primary .nav-subnav-trigger:hover,
-  .site-header.is-scrolled .nav-primary .nav-subnav-trigger:focus-visible {
+  .site-header.is-scrolled .nav-primary a:focus-visible {
     color: #fff;
     background: rgba(255, 255, 255, 0.12);
   }
@@ -279,7 +277,7 @@ body {
 
 @media (min-width: 901px) and (max-width: 1120px) {
   .nav-primary a,
-  .nav-primary .nav-subnav-trigger {
+  .nav-primary .nav-subnav-label {
     padding: 0.5rem 0.65rem;
     font-size: 1.0625rem;
   }
@@ -347,7 +345,7 @@ body {
 }
 
 .nav-primary a,
-.nav-primary .nav-subnav-trigger {
+.nav-primary .nav-subnav-label {
   display: block;
   padding: 0.55rem 0.95rem;
   font-weight: 600;
@@ -357,36 +355,19 @@ body {
   border-radius: 6px;
 }
 
-.nav-primary .nav-subnav-trigger {
+.nav-primary .nav-subnav-label {
+  margin: 0;
   font: inherit;
   font-weight: 600;
   font-size: 1.125rem;
   line-height: inherit;
   font-family: inherit;
-  border: none;
-  background: transparent;
-  cursor: pointer;
-  text-align: inherit;
+  cursor: default;
   box-sizing: border-box;
-}
-
-.nav-subnav-trigger-row {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.3rem;
-}
-
-.nav-subnav-trigger-text {
-  display: inline;
+  user-select: none;
 }
 
 @media (min-width: 901px) {
-  .nav-subnav-trigger-hint,
-  .nav-subnav-chevron {
-    display: none;
-  }
-
   .nav-primary li:hover .subnav,
   .nav-primary li:focus-within .subnav {
     opacity: 1;
@@ -396,9 +377,7 @@ body {
 }
 
 .nav-primary a:hover,
-.nav-primary a:focus-visible,
-.nav-primary .nav-subnav-trigger:hover,
-.nav-primary .nav-subnav-trigger:focus-visible {
+.nav-primary a:focus-visible {
   color: var(--color-forest);
   background: rgba(47, 77, 68, 0.08);
 }
@@ -536,54 +515,20 @@ body {
     text-align: center;
   }
 
-  .nav-primary .nav-subnav-trigger {
+  /* Som desktop: Garn med Broderigarn + Strikkegarn synlige direkte (ingen fold-ud) */
+  .nav-primary .nav-subnav-label {
     width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 0.2rem;
-  }
-
-  .nav-subnav-trigger-row {
-    gap: 0.4rem;
-  }
-
-  .nav-subnav-chevron {
-    display: block;
-    width: 1.125rem;
-    height: 1.125rem;
-    flex-shrink: 0;
-    opacity: 0.72;
-    transition: transform 0.25s ease;
-  }
-
-  .nav-primary > li.is-subnav-open .nav-subnav-chevron {
-    transform: rotate(180deg);
-  }
-
-  .nav-subnav-trigger-hint {
-    display: block;
-    font-size: 0.8125rem;
-    font-weight: 500;
-    line-height: 1.35;
-    color: var(--color-muted);
-    opacity: 0.9;
-    max-width: 100%;
-  }
-
-  .nav-primary > li.is-subnav-open .nav-subnav-trigger-hint {
-    display: none;
   }
 
   .nav-primary .subnav {
     position: static;
-    opacity: 0;
-    visibility: hidden;
-    max-height: 0;
-    margin-top: 0;
-    padding: 0 0 0 0.65rem;
-    overflow: hidden;
+    opacity: 1;
+    visibility: visible;
+    max-height: none;
+    margin-top: 0.35rem;
+    margin-bottom: 0.15rem;
+    padding: 0.4rem 0.5rem 0.4rem 0.75rem;
+    overflow: visible;
     transform: none;
     box-shadow: none;
     border: none;
@@ -595,22 +540,6 @@ body {
     max-width: 100%;
     text-align: center;
     box-sizing: border-box;
-    transition:
-      max-height 0.28s ease,
-      opacity 0.2s ease,
-      visibility 0.2s,
-      margin-top 0.2s ease,
-      padding-block 0.2s ease;
-  }
-
-  .nav-primary > li.is-subnav-open .subnav,
-  .nav-primary > li.is-subnav-open:hover .subnav,
-  .nav-primary > li.is-subnav-open:focus-within .subnav {
-    opacity: 1;
-    visibility: visible;
-    max-height: 12rem;
-    margin-top: 0.35rem;
-    padding: 0.4rem 0.5rem 0.4rem 0.75rem;
   }
 
   .nav-primary .subnav li {
@@ -624,7 +553,7 @@ body {
   }
 
   .nav-primary a,
-  .nav-primary .nav-subnav-trigger {
+  .nav-primary .nav-subnav-label {
     padding: 0.7rem 0.85rem;
     font-size: 1.125rem;
   }
