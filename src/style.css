@@ -81,6 +81,87 @@ body {
   z-index: 100;
   background: transparent;
   border-bottom: 1px solid rgba(226, 220, 210, 0.45);
+  transition:
+    background 0.3s ease,
+    border-color 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .site-header {
+    transition: none;
+  }
+}
+
+.site-header.is-scrolled {
+  background: rgba(42, 38, 34, 0.92);
+  border-bottom-color: rgba(255, 255, 255, 0.12);
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.12);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.site-header.is-scrolled .brand,
+.site-header.is-scrolled .brand-text {
+  color: #f5f2eb;
+}
+
+.site-header.is-scrolled .brand img {
+  filter: brightness(0) invert(1);
+}
+
+@media (min-width: 901px) {
+  .site-header.is-scrolled .nav-primary a {
+    color: rgba(245, 242, 235, 0.88);
+  }
+
+  .site-header.is-scrolled .nav-primary a:hover,
+  .site-header.is-scrolled .nav-primary a:focus-visible {
+    color: #fff;
+    background: rgba(255, 255, 255, 0.12);
+  }
+
+  .site-header.is-scrolled .nav-primary .subnav a {
+    color: var(--color-muted);
+  }
+
+  .site-header.is-scrolled .nav-primary .subnav a:hover,
+  .site-header.is-scrolled .nav-primary .subnav a:focus-visible {
+    color: var(--color-forest);
+    background: rgba(47, 77, 68, 0.08);
+  }
+}
+
+.site-header.is-scrolled .header-instagram {
+  color: #f5f2eb;
+}
+
+.site-header.is-scrolled .header-instagram:hover,
+.site-header.is-scrolled .header-instagram:focus-visible {
+  color: #fff;
+  border-color: rgba(255, 255, 255, 0.25);
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.site-header.is-scrolled .lang-link {
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.site-header.is-scrolled .lang-link:hover,
+.site-header.is-scrolled .lang-link:focus-visible {
+  border-color: rgba(255, 255, 255, 0.35);
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.site-header.is-scrolled .lang-link--default {
+  border-color: rgba(255, 255, 255, 0.45);
+  background: rgba(255, 255, 255, 0.14);
+}
+
+.site-header.is-scrolled .nav-toggle {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: rgba(255, 255, 255, 0.28);
+  color: #f5f2eb;
 }
 
 .header-inner {

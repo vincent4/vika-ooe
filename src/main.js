@@ -17,6 +17,17 @@ if (yearEl) {
   yearEl.textContent = String(new Date().getFullYear());
 }
 
+const headerEl = document.querySelector(".site-header");
+const scrollThresholdPx = 32;
+
+function updateHeaderScroll() {
+  if (!headerEl) return;
+  headerEl.classList.toggle("is-scrolled", window.scrollY > scrollThresholdPx);
+}
+
+window.addEventListener("scroll", updateHeaderScroll, { passive: true });
+updateHeaderScroll();
+
 const navToggle = document.querySelector(".nav-toggle");
 const nav = document.getElementById("site-nav");
 
