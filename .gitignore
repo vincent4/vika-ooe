@@ -1,0 +1,25 @@
+# OS
+Thumbs.db
+Desktop.ini
+.DS_Store
+
+# Editors
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Logs & temp
+*.log
+*.tmp
+.cache/
+
+# Env (hvis du senere tilføjer backend)
+.env
+.env.local
+*.pem
+
+# Dependencies (hvis du senere tilføjer Node)
+node_modules/
+dist/
+build/
