@@ -179,8 +179,8 @@ body {
 
 @media (min-width: 901px) and (max-width: 1120px) {
   .nav-primary a {
-    padding: 0.5rem 0.55rem;
-    font-size: 0.875rem;
+    padding: 0.5rem 0.65rem;
+    font-size: 1.0625rem;
   }
 
   .brand-text {
@@ -247,9 +247,9 @@ body {
 
 .nav-primary a {
   display: block;
-  padding: 0.5rem 0.85rem;
+  padding: 0.55rem 0.95rem;
   font-weight: 600;
-  font-size: 0.9375rem;
+  font-size: 1.125rem;
   color: var(--color-muted);
   text-decoration: none;
   border-radius: 6px;
@@ -290,8 +290,9 @@ body {
 }
 
 .nav-primary .subnav a {
-  padding: 0.45rem 0.65rem;
+  padding: 0.5rem 0.7rem;
   font-weight: 500;
+  font-size: 1.0625rem;
 }
 
 @media (max-width: 900px) {
@@ -390,7 +391,12 @@ body {
   }
 
   .nav-primary a {
-    padding: 0.65rem 0.75rem;
+    padding: 0.7rem 0.85rem;
+    font-size: 1.125rem;
+  }
+
+  .nav-primary .subnav a {
+    font-size: 1.0625rem;
   }
 }
 
