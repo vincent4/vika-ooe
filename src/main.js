@@ -32,19 +32,11 @@ const navToggle = document.querySelector(".nav-toggle");
 const nav = document.getElementById("site-nav");
 const mqMobileNav = window.matchMedia("(max-width: 900px)");
 
-function isSubnavParentLink(link) {
-  const li = link.closest(".nav-primary > li");
-  if (!li) return false;
-  const subnav = li.querySelector(":scope > ul.subnav");
-  return !!(subnav && li.querySelector(":scope > a") === link);
-}
-
 function resetMobileSubnavs() {
   if (!nav) return;
   nav.querySelectorAll(".nav-primary > li.is-subnav-open").forEach((li) => {
     li.classList.remove("is-subnav-open");
-    const a = li.querySelector(":scope > a");
-    if (a) a.setAttribute("aria-expanded", "false");
+    li.querySelector(":scope > .nav-subnav-trigger")?.setAttribute("aria-expanded", "false");
   });
 }
 
@@ -65,22 +57,24 @@ if (navToggle && nav) {
     if (!open) resetMobileSubnavs();
   });
 
+  nav.querySelectorAll(".nav-subnav-trigger").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      if (!mqMobileNav.matches()) return;
+      const li = btn.closest(".nav-primary > li");
+      const wasOpen = li.classList.contains("is-subnav-open");
+      nav.querySelectorAll(".nav-primary > li.is-subnav-open").forEach((openLi) => {
+        if (openLi !== li) {
+          openLi.classList.remove("is-subnav-open");
+          openLi.querySelector(":scope > .nav-subnav-trigger")?.setAttribute("aria-expanded", "false");
+        }
+      });
+      li.classList.toggle("is-subnav-open", !wasOpen);
+      btn.setAttribute("aria-expanded", !wasOpen ? "true" : "false");
+    });
+  });
+
   nav.querySelectorAll("a").forEach((link) => {
-    link.addEventListener("click", (e) => {
-      if (mqMobileNav.matches() && isSubnavParentLink(link)) {
-        e.preventDefault();
-        const li = link.closest(".nav-primary > li");
-        const wasOpen = li.classList.contains("is-subnav-open");
-        nav.querySelectorAll(".nav-primary > li.is-subnav-open").forEach((openLi) => {
-          if (openLi !== li) {
-            openLi.classList.remove("is-subnav-open");
-            openLi.querySelector(":scope > a")?.setAttribute("aria-expanded", "false");
-          }
-        });
-        li.classList.toggle("is-subnav-open", !wasOpen);
-        link.setAttribute("aria-expanded", !wasOpen ? "true" : "false");
-        return;
-      }
+    link.addEventListener("click", () => {
       closeMobileNav();
     });
   });

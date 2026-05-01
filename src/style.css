@@ -111,12 +111,15 @@ body {
 }
 
 @media (min-width: 901px) {
-  .site-header.is-scrolled .nav-primary a {
+  .site-header.is-scrolled .nav-primary a,
+  .site-header.is-scrolled .nav-primary .nav-subnav-trigger {
     color: rgba(245, 242, 235, 0.88);
   }
 
   .site-header.is-scrolled .nav-primary a:hover,
-  .site-header.is-scrolled .nav-primary a:focus-visible {
+  .site-header.is-scrolled .nav-primary a:focus-visible,
+  .site-header.is-scrolled .nav-primary .nav-subnav-trigger:hover,
+  .site-header.is-scrolled .nav-primary .nav-subnav-trigger:focus-visible {
     color: #fff;
     background: rgba(255, 255, 255, 0.12);
   }
@@ -275,7 +278,8 @@ body {
 }
 
 @media (min-width: 901px) and (max-width: 1120px) {
-  .nav-primary a {
+  .nav-primary a,
+  .nav-primary .nav-subnav-trigger {
     padding: 0.5rem 0.65rem;
     font-size: 1.0625rem;
   }
@@ -342,7 +346,8 @@ body {
   position: relative;
 }
 
-.nav-primary a {
+.nav-primary a,
+.nav-primary .nav-subnav-trigger {
   display: block;
   padding: 0.55rem 0.95rem;
   font-weight: 600;
@@ -352,8 +357,23 @@ body {
   border-radius: 6px;
 }
 
+.nav-primary .nav-subnav-trigger {
+  font: inherit;
+  font-weight: 600;
+  font-size: 1.125rem;
+  line-height: inherit;
+  font-family: inherit;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  text-align: inherit;
+  box-sizing: border-box;
+}
+
 .nav-primary a:hover,
-.nav-primary a:focus-visible {
+.nav-primary a:focus-visible,
+.nav-primary .nav-subnav-trigger:hover,
+.nav-primary .nav-subnav-trigger:focus-visible {
   color: var(--color-forest);
   background: rgba(47, 77, 68, 0.08);
 }
@@ -498,6 +518,10 @@ body {
     text-align: center;
   }
 
+  .nav-primary .nav-subnav-trigger {
+    width: 100%;
+  }
+
   /* Undermenu kun ved klik (.is-subnav-open), ikke hover/focus — undgå auto-åben på touch */
   .nav-primary li:hover .subnav,
   .nav-primary li:focus-within .subnav {
@@ -547,7 +571,8 @@ body {
     text-align: center;
   }
 
-  .nav-primary a {
+  .nav-primary a,
+  .nav-primary .nav-subnav-trigger {
     padding: 0.7rem 0.85rem;
     font-size: 1.125rem;
   }
