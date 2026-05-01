@@ -314,17 +314,19 @@ body {
 
 /* ——— Product grid ——— */
 .product-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(min(100%, 17.5rem), 1fr));
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
   gap: clamp(1rem, 2.5vw, 1.75rem);
-  justify-items: center;
 }
 
 .product-card {
   display: flex;
   flex-direction: column;
+  flex: 0 1 22.5rem;
   width: 100%;
   max-width: 22.5rem;
+  min-width: 0;
   background: var(--color-surface);
   border: 1px solid var(--color-border);
   border-radius: calc(var(--radius) + 4px);
@@ -464,8 +466,8 @@ body {
 
 @media (min-width: 520px) {
   .feature-card:has(.feat-img) .feat-img {
-    max-width: none;
-    margin-inline: 0;
+    max-width: min(100%, 11rem);
+    margin-inline: auto;
   }
 }
 
@@ -518,13 +520,8 @@ body {
 .showcase-visual {
   width: 100%;
   max-width: min(100%, 38rem);
+  margin-inline: auto;
   justify-self: center;
-}
-
-@media (min-width: 800px) {
-  .showcase-visual {
-    justify-self: start;
-  }
 }
 
 .showcase-visual a {
