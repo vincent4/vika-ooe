@@ -48,6 +48,18 @@ body {
   top: 1rem;
 }
 
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
 .container {
   width: min(100% - 2rem, 1100px);
   margin-inline: auto;
@@ -188,9 +200,13 @@ body {
 }
 
 .section-text {
-  margin: 0;
+  margin: 0 0 1.25rem;
   max-width: var(--max-width);
   color: var(--color-muted);
+}
+
+.section-text:last-child {
+  margin-bottom: 0;
 }
 
 .section-text code {
@@ -199,6 +215,57 @@ body {
   background: var(--color-bg);
   border: 1px solid var(--color-border);
   border-radius: 6px;
+}
+
+.contact-form {
+  max-width: var(--max-width);
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.form-field label {
+  font-weight: 600;
+  font-size: 0.9375rem;
+}
+
+.form-field input,
+.form-field textarea {
+  font-family: inherit;
+  font-size: 1rem;
+  padding: 0.65rem 0.85rem;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  background: var(--color-surface);
+  color: var(--color-text);
+}
+
+.form-field input:focus,
+.form-field textarea:focus {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+.form-field textarea {
+  min-height: 8rem;
+  resize: vertical;
+}
+
+.contact-form .btn-primary {
+  align-self: flex-start;
+  margin-top: 0.25rem;
+}
+
+.form-hint {
+  margin: 0;
+  font-size: 0.875rem;
+  color: var(--color-muted);
 }
 
 .site-footer {
