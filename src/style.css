@@ -112,12 +112,14 @@ body {
 
 @media (min-width: 901px) {
   .site-header.is-scrolled .nav-primary a,
-  .site-header.is-scrolled .nav-primary .nav-subnav-label {
+  .site-header.is-scrolled .nav-primary .nav-subnav-trigger {
     color: rgba(245, 242, 235, 0.88);
   }
 
   .site-header.is-scrolled .nav-primary a:hover,
-  .site-header.is-scrolled .nav-primary a:focus-visible {
+  .site-header.is-scrolled .nav-primary a:focus-visible,
+  .site-header.is-scrolled .nav-primary .nav-subnav-trigger:hover,
+  .site-header.is-scrolled .nav-primary .nav-subnav-trigger:focus-visible {
     color: #fff;
     background: rgba(255, 255, 255, 0.12);
   }
@@ -277,7 +279,7 @@ body {
 
 @media (min-width: 901px) and (max-width: 1120px) {
   .nav-primary a,
-  .nav-primary .nav-subnav-label {
+  .nav-primary .nav-subnav-trigger {
     padding: 0.5rem 0.65rem;
     font-size: 1.0625rem;
   }
@@ -345,7 +347,7 @@ body {
 }
 
 .nav-primary a,
-.nav-primary .nav-subnav-label {
+.nav-primary .nav-subnav-trigger {
   display: block;
   padding: 0.55rem 0.95rem;
   font-weight: 600;
@@ -355,21 +357,25 @@ body {
   border-radius: 6px;
 }
 
-.nav-primary .nav-subnav-label {
+.nav-primary .nav-subnav-trigger {
   margin: 0;
   font: inherit;
   font-weight: 600;
   font-size: 1.125rem;
   line-height: inherit;
   font-family: inherit;
-  cursor: default;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  text-align: inherit;
   box-sizing: border-box;
-  user-select: none;
 }
 
 @media (min-width: 901px) {
-  .nav-primary li:hover .subnav,
-  .nav-primary li:focus-within .subnav {
+  /* Undermenu først ved hover på knappen, eller mens musen er i dropdown / tastaturfokus i gruppen */
+  .nav-primary .nav-subnav-trigger:hover + .subnav,
+  .nav-primary .subnav:hover,
+  .nav-primary > li:has(.nav-subnav-trigger):focus-within .subnav {
     opacity: 1;
     visibility: visible;
     transform: translateY(0);
@@ -377,7 +383,9 @@ body {
 }
 
 .nav-primary a:hover,
-.nav-primary a:focus-visible {
+.nav-primary a:focus-visible,
+.nav-primary .nav-subnav-trigger:hover,
+.nav-primary .nav-subnav-trigger:focus-visible {
   color: var(--color-forest);
   background: rgba(47, 77, 68, 0.08);
 }
@@ -515,20 +523,19 @@ body {
     text-align: center;
   }
 
-  /* Som desktop: Garn med Broderigarn + Strikkegarn synlige direkte (ingen fold-ud) */
-  .nav-primary .nav-subnav-label {
+  .nav-primary .nav-subnav-trigger {
     width: 100%;
   }
 
   .nav-primary .subnav {
     position: static;
-    opacity: 1;
-    visibility: visible;
-    max-height: none;
-    margin-top: 0.35rem;
-    margin-bottom: 0.15rem;
-    padding: 0.4rem 0.5rem 0.4rem 0.75rem;
-    overflow: visible;
+    opacity: 0;
+    visibility: hidden;
+    max-height: 0;
+    margin-top: 0;
+    margin-bottom: 0;
+    padding: 0 0 0 0.65rem;
+    overflow: hidden;
     transform: none;
     box-shadow: none;
     border: none;
@@ -540,6 +547,22 @@ body {
     max-width: 100%;
     text-align: center;
     box-sizing: border-box;
+    transition:
+      max-height 0.28s ease,
+      opacity 0.2s ease,
+      visibility 0.2s,
+      margin-top 0.2s ease,
+      padding-block 0.2s ease;
+  }
+
+  .nav-primary > li.is-subnav-open .subnav {
+    opacity: 1;
+    visibility: visible;
+    max-height: 12rem;
+    margin-top: 0.35rem;
+    margin-bottom: 0.15rem;
+    padding: 0.4rem 0.5rem 0.4rem 0.75rem;
+    overflow: visible;
   }
 
   .nav-primary .subnav li {
@@ -553,7 +576,7 @@ body {
   }
 
   .nav-primary a,
-  .nav-primary .nav-subnav-label {
+  .nav-primary .nav-subnav-trigger {
     padding: 0.7rem 0.85rem;
     font-size: 1.125rem;
   }
