@@ -494,6 +494,10 @@ body {
     visibility: visible;
   }
 
+  .nav-primary > li {
+    text-align: center;
+  }
+
   .nav-primary .subnav {
     position: static;
     opacity: 1;
@@ -503,7 +507,15 @@ body {
     border: none;
     background: rgba(47, 77, 68, 0.06);
     margin-top: 0.25rem;
-    margin-left: 0.5rem;
+    margin-left: 0;
+    margin-inline: auto;
+    width: fit-content;
+    max-width: 100%;
+    text-align: center;
+  }
+
+  .nav-primary .subnav li {
+    text-align: center;
   }
 
   .nav-primary a {
