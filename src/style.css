@@ -394,6 +394,7 @@ body {
 
 @media (max-width: 900px) {
   .header-inner {
+    position: relative;
     display: flex;
     flex-wrap: nowrap;
     align-items: center;
@@ -403,7 +404,7 @@ body {
   .brand {
     flex: 1 1 auto;
     min-width: 0;
-    margin-right: auto;
+    margin-right: 0;
     grid-column: unset;
     justify-self: unset;
   }
@@ -431,6 +432,7 @@ body {
 
   .header-end {
     flex: 0 0 auto;
+    margin-left: auto;
     grid-column: unset;
     justify-self: unset;
     gap: 0.4rem;
@@ -453,7 +455,11 @@ body {
 
   .nav-toggle {
     display: flex;
-    flex: 0 0 auto;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 5;
     grid-column: unset;
     justify-self: unset;
   }
