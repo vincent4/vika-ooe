@@ -883,6 +883,37 @@ body {
   color: var(--color-forest);
 }
 
+/* Schoppel-logo under broderigarn-tekst — lav profil så kortet ikke vokser unødigt */
+.feature-card:has(.feat-logo-below) {
+  padding-block: clamp(0.95rem, 2.1vw, 1.28rem);
+}
+
+.feature-card .feat-logo-below {
+  margin-top: 0.2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  line-height: 0;
+}
+
+.feature-card .feat-logo-below a {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  max-height: clamp(1.85rem, 4.6vw, 2.65rem);
+  cursor: zoom-in;
+}
+
+.feature-card .feat-logo-below img {
+  display: block;
+  width: auto;
+  max-width: 100%;
+  height: auto;
+  max-height: clamp(1.85rem, 4.6vw, 2.65rem);
+  object-fit: contain;
+  object-position: center center;
+}
+
 /* ——— Showcase (dyr / større format) — én række, tekst under billede ——— */
 .showcase-row {
   display: grid;
