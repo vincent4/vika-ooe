@@ -19,7 +19,7 @@
     />
   </head>
   <body>
-    <a class="skip-link" href="#main">Spring til indhold</a>
+    <a class="skip-link" href="#main" data-i18n="skipLink">Spring til indhold</a>
     <header class="site-header">
       <div class="container header-inner">
         <a class="brand" href="./">
@@ -31,10 +31,10 @@
           />
           <span class="brand-text">Oehlenschläger</span>
         </a>
-        <nav id="site-nav" class="nav-wrap" aria-label="Hovedmenu">
+        <nav id="site-nav" class="nav-wrap" aria-label="Hovedmenu" data-i18n-aria-label="navAria">
           <ul class="nav-primary">
-            <li><a href="https://ooe.dk/broderier/">Broderier</a></li>
-            <li><a href="https://ooe.dk/sideunderopbygning_dk/">Stof</a></li>
+            <li><a href="https://ooe.dk/broderier/" data-i18n="navBroderier">Broderier</a></li>
+            <li><a href="https://ooe.dk/sideunderopbygning_dk/" data-i18n="navStof">Stof</a></li>
             <li>
               <button
                 type="button"
@@ -43,16 +43,17 @@
                 aria-expanded="false"
                 aria-controls="subnav-garn"
                 aria-haspopup="true"
+                data-i18n="navGarn"
               >
                 Garn
               </button>
               <ul id="subnav-garn" class="subnav" aria-labelledby="subnav-garn-label">
-                <li><a href="https://ooe.dk/SideUnderOpbygging2/">Broderigarn</a></li>
-                <li><a href="https://ooe.dk/strikkegarn/">Strikkegarn</a></li>
+                <li><a href="https://ooe.dk/SideUnderOpbygging2/" data-i18n="navBroderigarn">Broderigarn</a></li>
+                <li><a href="https://ooe.dk/strikkegarn/" data-i18n="navStrikkegarn">Strikkegarn</a></li>
               </ul>
             </li>
-            <li><a href="https://ooe.dk/SideUnderOpbygging2/">Tilbehør</a></li>
-            <li><a href="https://ooe.dk/kontakt_os/">Kontakt</a></li>
+            <li><a href="https://ooe.dk/SideUnderOpbygging2/" data-i18n="navTilbehoer">Tilbehør</a></li>
+            <li><a href="https://ooe.dk/kontakt_os/" data-i18n="navKontakt">Kontakt</a></li>
           </ul>
         </nav>
         <div class="header-end">
@@ -62,6 +63,7 @@
             target="_blank"
             rel="noopener noreferrer"
             aria-label="OOE på Instagram"
+            data-i18n-aria-label="instagramAria"
           >
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
               <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
@@ -69,11 +71,12 @@
               <circle cx="17.5" cy="6.5" r="1.25" fill="currentColor" stroke="none" />
             </svg>
           </a>
-          <ul class="lang-switch" aria-label="Vælg sprog">
+          <ul class="lang-switch" aria-label="Vælg sprog" data-i18n-aria-label="langSwitchAria">
             <li>
               <a
                 class="lang-link lang-link--default"
-                href="https://ooe.dk/"
+                href="./"
+                data-lang-link="da"
                 title="Dansk"
                 lang="da"
               >
@@ -88,7 +91,7 @@
               </a>
             </li>
             <li>
-              <a class="lang-link" href="https://ooe.dk/de/home_de/" title="Deutsch" lang="de">
+              <a class="lang-link" href="./de/" data-lang-link="de" title="Deutsch" lang="de">
                 <span class="lang-flag" aria-hidden="true">
                   <svg class="lang-flag-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 5 3" focusable="false">
                     <rect fill="#000" width="5" height="1" />
@@ -121,6 +124,7 @@
           aria-expanded="false"
           aria-controls="site-nav"
           aria-label="Åbn menu"
+          data-i18n-aria-label="navToggleOpen"
         >
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true">
             <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
@@ -133,7 +137,7 @@
       <section class="intro">
         <div class="container">
           <h1>O. Oehlenschlägers Eftf ApS</h1>
-          <p class="lead" lang="da">
+          <p class="lead" lang="da" data-i18n-html="introLead">
             Vi er en moderne virksomhed, der designer, producerer og sælger OOE-broderier samt relaterede
             produkter til engrosmarkedet.<br />
             Vores sortiment omfatter broderipakninger, garner, stoffer og tilbehør.<br />
@@ -146,8 +150,8 @@
       <section class="section" id="broderier" aria-labelledby="h-nyt">
         <div class="container">
           <header class="section-head">
-            <p class="section-kicker" id="h-nyt">Udvalg</p>
-            <h2>Broderipakninger og motiver</h2>
+            <p class="section-kicker" id="h-nyt" data-i18n="kickerUdvalg">Udvalg</p>
+            <h2 data-i18n="hBroderier">Broderipakninger og motiver</h2>
           </header>
           <div class="product-grid">
             <article class="product-card">
@@ -177,7 +181,7 @@
                 </p>
                 <span class="zoom-hint" aria-hidden="true">
                   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607ZM10.5 7.5v6m3-3h-6" /></svg>
-                  Klik for større billede
+                  <span data-i18n="zoomHint">Klik for større billede</span>
                 </span>
               </div>
             </article>
@@ -205,7 +209,7 @@
                 </p>
                 <span class="zoom-hint" aria-hidden="true">
                   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607ZM10.5 7.5v6m3-3h-6" /></svg>
-                  Klik for større billede
+                  <span data-i18n="zoomHint">Klik for større billede</span>
                 </span>
               </div>
             </article>
@@ -231,7 +235,7 @@
                 <p class="meta">ca. 40×40 cm · DMC-Mouline 100% Cotton</p>
                 <span class="zoom-hint" aria-hidden="true">
                   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607ZM10.5 7.5v6m3-3h-6" /></svg>
-                  Klik for større billede
+                  <span data-i18n="zoomHint">Klik for større billede</span>
                 </span>
               </div>
             </article>
@@ -262,7 +266,7 @@
                 </p>
                 <span class="zoom-hint" aria-hidden="true">
                   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607ZM10.5 7.5v6m3-3h-6" /></svg>
-                  Klik for større billede
+                  <span data-i18n="zoomHint">Klik for større billede</span>
                 </span>
               </div>
             </article>
@@ -293,7 +297,7 @@
                 </p>
                 <span class="zoom-hint" aria-hidden="true">
                   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607ZM10.5 7.5v6m3-3h-6" /></svg>
-                  Klik for større billede
+                  <span data-i18n="zoomHint">Klik for større billede</span>
                 </span>
               </div>
             </article>
@@ -304,8 +308,8 @@
       <section class="section section-muted" id="puder" aria-labelledby="h-puder">
         <div class="container">
           <header class="section-head">
-            <p class="section-kicker">Udvalg</p>
-            <h2 id="h-puder">Korsstingspuder og motiver</h2>
+            <p class="section-kicker" data-i18n="kickerUdvalg">Udvalg</p>
+            <h2 id="h-puder" data-i18n="hPuder">Korsstingspuder og motiver</h2>
           </header>
           <div class="product-grid">
             <article class="product-card">
@@ -333,7 +337,7 @@
                 </p>
                 <span class="zoom-hint" aria-hidden="true">
                   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607ZM10.5 7.5v6m3-3h-6" /></svg>
-                  Klik for større billede
+                  <span data-i18n="zoomHint">Klik for større billede</span>
                 </span>
               </div>
             </article>
@@ -362,7 +366,7 @@
                 </p>
                 <span class="zoom-hint" aria-hidden="true">
                   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607ZM10.5 7.5v6m3-3h-6" /></svg>
-                  Klik for større billede
+                  <span data-i18n="zoomHint">Klik for større billede</span>
                 </span>
               </div>
             </article>
@@ -388,7 +392,7 @@
                 <p class="meta">51614 (OOE Linen 10,5) · ca. 40×40 cm · DMC-Mouline</p>
                 <span class="zoom-hint" aria-hidden="true">
                   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607ZM10.5 7.5v6m3-3h-6" /></svg>
-                  Klik for større billede
+                  <span data-i18n="zoomHint">Klik for større billede</span>
                 </span>
               </div>
             </article>
@@ -414,7 +418,7 @@
                 <p class="meta">52026 (OOE Rustik aida 5,4) · ca. 32×32 cm</p>
                 <span class="zoom-hint" aria-hidden="true">
                   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607ZM10.5 7.5v6m3-3h-6" /></svg>
-                  Klik for større billede
+                  <span data-i18n="zoomHint">Klik for større billede</span>
                 </span>
               </div>
             </article>
@@ -440,7 +444,7 @@
                 <p class="meta">52029 (OOE Rustik aida 5,4) · ca. 32×32 cm</p>
                 <span class="zoom-hint" aria-hidden="true">
                   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607ZM10.5 7.5v6m3-3h-6" /></svg>
-                  Klik for større billede
+                  <span data-i18n="zoomHint">Klik for større billede</span>
                 </span>
               </div>
             </article>
@@ -451,8 +455,8 @@
       <section class="section" id="forar" aria-labelledby="h-forar">
         <div class="container">
           <header class="section-head">
-            <p class="section-kicker">Forår</p>
-            <h2 id="h-forar">Spring feelings</h2>
+            <p class="section-kicker" data-i18n="kickerForar">Forår</p>
+            <h2 id="h-forar" data-i18n="hForar">Spring feelings</h2>
           </header>
           <div class="product-grid">
             <article class="product-card">
@@ -477,7 +481,7 @@
                 <p class="meta">62211 (OOE Floba 10,0) · ca. ø10 cm · DMC Mouline-garn</p>
                 <span class="zoom-hint" aria-hidden="true">
                   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607ZM10.5 7.5v6m3-3h-6" /></svg>
-                  Klik for større billede
+                  <span data-i18n="zoomHint">Klik for større billede</span>
                 </span>
               </div>
             </article>
@@ -503,7 +507,7 @@
                 <p class="meta">62210 (OOE Floba 10,0) · ca. ø10 cm · DMC Mouline-garn</p>
                 <span class="zoom-hint" aria-hidden="true">
                   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607ZM10.5 7.5v6m3-3h-6" /></svg>
-                  Klik for større billede
+                  <span data-i18n="zoomHint">Klik for større billede</span>
                 </span>
               </div>
             </article>
@@ -529,7 +533,7 @@
                 <p class="meta">62211 (OOE Floba 10,0) · ca. ø10 cm · DMC Mouline-garn</p>
                 <span class="zoom-hint" aria-hidden="true">
                   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607ZM10.5 7.5v6m3-3h-6" /></svg>
-                  Klik for større billede
+                  <span data-i18n="zoomHint">Klik for større billede</span>
                 </span>
               </div>
             </article>
@@ -540,7 +544,7 @@
       <section class="section section-muted" id="se-ogsaa" aria-labelledby="h-se">
         <div class="container">
           <header class="section-head">
-            <h2 id="h-se">Se også</h2>
+            <h2 id="h-se" data-i18n="hSeOgsaa">Se også</h2>
           </header>
           <div class="feature-grid">
             <div class="feature-card">
@@ -561,36 +565,36 @@
                 </a>
               </div>
               <div>
-                <h3>Broderigarner til ethvert projekt</h3>
-                <p>
+                <h3 data-i18n="featEmbroideryTitle">Broderigarner til ethvert projekt</h3>
+                <p data-i18n="featEmbroideryP1">
                   Hos os finder du broderigarn til alle typer projekter. Ved siden af vores egne smukke
                   1-trådede bomuldsgarn fører vi hele DMCs og Anchors broderigarnsunivers.
                 </p>
-                <p><a class="text-link" href="https://ooe.dk/SideUnderOpbygning_Dk">Se mere på ooe.dk</a></p>
+                <p><a class="text-link" href="https://ooe.dk/SideUnderOpbygning_Dk" data-i18n="featEmbroideryLink">Se mere på ooe.dk</a></p>
               </div>
             </div>
             <div class="feature-card">
               <div>
-                <h3>Schoppel-Wolle – innovative strikkegarner</h3>
-                <p>
+                <h3 data-i18n="featSchoppelTitle">Schoppel-Wolle – innovative strikkegarner</h3>
+                <p data-i18n="featSchoppelP1">
                   I Danmark er vi stolte af at være grossist for Schoppel-Wolle, en verdenskendt producent
                   af innovative og unikke strikkegarner. Udover de fremviste garner tilbyder vi et væld af
                   andre spændende garnmuligheder.
                 </p>
                 <p>
-                  <a class="text-link" href="https://ooe.dk/strikkegarn/">Se flere garner – klik her</a>
+                  <a class="text-link" href="https://ooe.dk/strikkegarn/" data-i18n="featSchoppelLink">Se flere garner – klik her</a>
                 </p>
               </div>
             </div>
             <div class="feature-card">
               <div>
-                <h3>OOE-broderistoffer</h3>
-                <p>
+                <h3 data-i18n="featStofTitle">OOE-broderistoffer</h3>
+                <p data-i18n="featStofP1">
                   Vores OOE-broderistoffer er nøje udvalgt blandt de bedste europæiske væverier og
                   kendetegnes ved høj kvalitet, smukke strukturer og enestående holdbarhed. Vi tilbyder hør,
                   aida, stramaj og mere – til både traditionelle og moderne broderiprojekter.
                 </p>
-                <p><a class="text-link" href="https://ooe.dk/SideUnderOpbygning_Dk">Se mere på ooe.dk</a></p>
+                <p><a class="text-link" href="https://ooe.dk/SideUnderOpbygning_Dk" data-i18n="featStofLink">Se mere på ooe.dk</a></p>
               </div>
             </div>
             <div class="feature-card">
@@ -611,9 +615,9 @@
                 </a>
               </div>
               <div>
-                <h3>Tilbehør til broderi</h3>
-                <p>Hos os finder sakse, nåle, syrammer og garnopbevaring med mere.</p>
-                <p><a class="text-link" href="https://ooe.dk/SideUnderOpbygning_Dk">Se mere på ooe.dk</a></p>
+                <h3 data-i18n="featTilbehorTitle">Tilbehør til broderi</h3>
+                <p data-i18n="featTilbehorP1">Hos os finder sakse, nåle, syrammer og garnopbevaring med mere.</p>
+                <p><a class="text-link" href="https://ooe.dk/SideUnderOpbygning_Dk" data-i18n="featTilbehorLink">Se mere på ooe.dk</a></p>
               </div>
             </div>
           </div>
@@ -623,7 +627,7 @@
       <section class="section" id="inspiration" aria-labelledby="h-insp">
         <div class="container">
           <header class="section-head">
-            <h2 id="h-insp">Broderier i større format</h2>
+            <h2 id="h-insp" data-i18n="hInspiration">Broderier i større format</h2>
           </header>
           <div class="showcase-row">
             <article class="showcase-item">
@@ -644,11 +648,11 @@
                 </a>
               </div>
               <div class="showcase-copy">
-                <p>Broderet på 10 trådet hørlærred (OOE1428)<br />med DMC Mouliné-garn.</p>
-                <p><em>no. 52005,</em> <em>str. 20×50 cm.</em></p>
-                <p>—</p>
-                <p>Broderet på 5,4 Aida (OOE414)<br />med DMC Mouliné-garn.</p>
-                <p><em>no. 52006,</em> <em>str. 30×40 cm.</em></p>
+                <p data-i18n-html="showcaseA1">Broderet på 10 trådet hørlærred (OOE1428)<br />med DMC Mouliné-garn.</p>
+                <p data-i18n-html="showcaseA2"><em>no. 52005,</em> <em>str. 20×50 cm.</em></p>
+                <p data-i18n-html="showcaseA3">—</p>
+                <p data-i18n-html="showcaseA4">Broderet på 5,4 Aida (OOE414)<br />med DMC Mouliné-garn.</p>
+                <p data-i18n-html="showcaseA5"><em>no. 52006,</em> <em>str. 30×40 cm.</em></p>
               </div>
             </article>
             <article class="showcase-item">
@@ -669,8 +673,8 @@
                 </a>
               </div>
               <div class="showcase-copy">
-                <p>Broderet på 10 trådet hørlærred (OOE1428)<br />med DMC Mouliné-garn.</p>
-                <p><em>no. 50139, str. 20×50 cm.</em></p>
+                <p data-i18n-html="showcaseB1">Broderet på 10 trådet hørlærred (OOE1428)<br />med DMC Mouliné-garn.</p>
+                <p data-i18n-html="showcaseB2"><em>no. 50139, str. 20×50 cm.</em></p>
               </div>
             </article>
             <article class="showcase-item">
@@ -691,8 +695,8 @@
                 </a>
               </div>
               <div class="showcase-copy">
-                <p>Broderet på 10 trådet hørlærred (OOE1428)<br />med DMC Mouliné-garn.</p>
-                <p><em>no. 21319, str. 20×50 cm.</em></p>
+                <p data-i18n-html="showcaseC1">Broderet på 10 trådet hørlærred (OOE1428)<br />med DMC Mouliné-garn.</p>
+                <p data-i18n-html="showcaseC2"><em>no. 21319, str. 20×50 cm.</em></p>
               </div>
             </article>
           </div>
@@ -702,8 +706,8 @@
       <section class="section section-muted" id="kontakt">
         <div class="container">
           <header class="section-head">
-            <h2>Skriv til os</h2>
-            <p class="section-text contact-intro">
+            <h2 data-i18n="contactH2">Skriv til os</h2>
+            <p class="section-text contact-intro" data-i18n-html="contactIntro">
               Du kan også ringe på <strong>+45 86 88 36 70</strong> eller skrive til
               <a href="mailto:ooe@ooe.dk">ooe@ooe.dk</a>. Formularen nedenfor kræver hosting med Netlify
               Forms for at virke automatisk.
@@ -719,23 +723,23 @@
             <input type="hidden" name="form-name" value="contact" />
             <p class="visually-hidden">
               <label>
-                Lad stå tom
+                <span data-i18n="honeypotLabel">Lad stå tom</span>
                 <input name="bot-field" autocomplete="off" tabindex="-1" />
               </label>
             </p>
             <div class="form-field">
-              <label for="name">Navn</label>
+              <label for="name" data-i18n="labelName">Navn</label>
               <input id="name" name="name" type="text" autocomplete="name" required />
             </div>
             <div class="form-field">
-              <label for="email">E-mail</label>
+              <label for="email" data-i18n="labelEmail">E-mail</label>
               <input id="email" name="email" type="email" autocomplete="email" required />
             </div>
             <div class="form-field">
-              <label for="message">Besked</label>
+              <label for="message" data-i18n="labelMessage">Besked</label>
               <textarea id="message" name="message" required></textarea>
             </div>
-            <button class="btn btn-primary" type="submit">Send</button>
+            <button class="btn btn-primary" type="submit" data-i18n="submitBtn">Send</button>
           </form>
         </div>
       </section>
@@ -752,12 +756,12 @@
           </p>
         </div>
         <div>
-          <p><a href="https://ooe.dk/">Om os på ooe.dk</a></p>
-          <p><a href="https://ooe.dk/">Persondatapolitik (GDPR)</a></p>
+          <p><a href="https://ooe.dk/" data-i18n="footerAbout">Om os på ooe.dk</a></p>
+          <p><a href="https://ooe.dk/" data-i18n="footerGdpr">Persondatapolitik (GDPR)</a></p>
         </div>
       </div>
       <div class="container footer-legal">
-        <p>&copy; <span id="year"></span> O. Oehlenschlägers Eftf. ApS. Indhold og billeder tilhører OOE; denne side er et nyt layout baseret på det offentlige site.</p>
+        <p>&copy; <span id="year"></span> <span data-i18n="footerRest">O. Oehlenschlägers Eftf. ApS. Indhold og billeder tilhører OOE; denne side er et nyt layout baseret på det offentlige site.</span></p>
       </div>
     </footer>
 

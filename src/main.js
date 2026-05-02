@@ -1,6 +1,9 @@
 import GLightbox from "glightbox";
 import "glightbox/dist/css/glightbox.min.css";
 import "./style.css";
+import { applyI18n, t } from "./i18n.js";
+
+applyI18n();
 
 GLightbox({
   selector: ".glightbox",
@@ -49,7 +52,7 @@ function closeMobileNav() {
   document.body.classList.remove("nav-open");
   if (navToggle) {
     navToggle.setAttribute("aria-expanded", "false");
-    navToggle.setAttribute("aria-label", "Åbn menu");
+    navToggle.setAttribute("aria-label", t("navToggleOpen"));
   }
   resetGarnSubnav();
 }
@@ -58,7 +61,7 @@ if (navToggle && nav) {
   navToggle.addEventListener("click", () => {
     const open = document.body.classList.toggle("nav-open");
     navToggle.setAttribute("aria-expanded", open ? "true" : "false");
-    navToggle.setAttribute("aria-label", open ? "Luk menu" : "Åbn menu");
+    navToggle.setAttribute("aria-label", open ? t("navToggleClose") : t("navToggleOpen"));
     if (!open) resetGarnSubnav();
   });
 
