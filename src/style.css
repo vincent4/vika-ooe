@@ -819,6 +819,21 @@ body {
   }
 }
 
+.feature-card.feature-card--img-above .feat-img a {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.feature-card.feature-card--img-above .feat-img img {
+  width: auto;
+  max-width: 100%;
+  height: auto;
+  max-height: clamp(2.75rem, 7.5vw, 3.875rem);
+  object-fit: contain;
+}
+
 .feature-card .feat-img a {
   display: block;
   line-height: 0;
