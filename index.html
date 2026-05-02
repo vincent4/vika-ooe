@@ -1,6 +1,18 @@
 <!DOCTYPE html>
 <html lang="da">
   <head>
+    <script>
+      (function () {
+        try {
+          var seg = location.pathname.split("/").filter(Boolean)[0];
+          if (seg && (seg.toLowerCase() === "de" || seg.toLowerCase() === "en")) {
+            var b = document.createElement("base");
+            b.href = location.origin + "/";
+            document.head.prepend(b);
+          }
+        } catch (e) {}
+      })();
+    </script>
     <meta charset="UTF-8" />
     <meta
       name="viewport"
