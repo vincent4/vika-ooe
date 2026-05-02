@@ -2,8 +2,9 @@ import { defineConfig } from "vite";
 
 export default defineConfig({
   root: ".",
-  // Relative URLs så dist virker ved direkte åbning af index.html og hosting i undermappe
-  base: "./",
+  // Rod-relative asset-stier (/assets/…) så CSS/JS også virker på /de/ (relative ./assets fejler dér).
+  // Lokal forhåndsvisning: npm run preview (eller åbn via dev-server), ikke file:// på dist/index.html.
+  base: "/",
   plugins: [
     {
       name: "serve-de-locale",
