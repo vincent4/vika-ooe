@@ -5,6 +5,36 @@ import { applyI18n, t } from "./i18n.js";
 
 applyI18n();
 
+/** Schoppel-kort: billedramme får ca. samme højde som teksten under (sprog/resize) */
+function setupImgAboveCards() {
+  if (typeof ResizeObserver === "undefined") return;
+  document.querySelectorAll(".feature-card--img-above:not([data-img-above-sync])").forEach((card) => {
+    const imgBox = card.querySelector(":scope > .feat-img");
+    const copy = card.querySelector(":scope > .feat-copy");
+    if (!imgBox || !copy) return;
+    card.dataset.imgAboveSync = "1";
+
+    const sync = () => {
+      const h = Math.ceil(copy.getBoundingClientRect().height);
+      if (h > 0) imgBox.style.maxHeight = `${h}px`;
+    };
+
+    const ro = new ResizeObserver(sync);
+    ro.observe(copy);
+    sync();
+  });
+}
+
+function runImgAboveSetup() {
+  requestAnimationFrame(() => setupImgAboveCards());
+}
+
+runImgAboveSetup();
+if (document.fonts?.ready) {
+  document.fonts.ready.then(runImgAboveSetup);
+}
+window.addEventListener("load", runImgAboveSetup);
+
 GLightbox({
   selector: ".glightbox",
   touchNavigation: true,

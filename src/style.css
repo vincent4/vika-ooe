@@ -808,8 +808,14 @@ body {
 }
 
 .feature-card.feature-card--img-above .feat-img {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
   max-width: 100%;
   margin-inline: 0;
+  /* max-height sættes fra JS ≈ .feat-copy højde; fallback før måling */
+  max-height: clamp(6rem, 28vw, 14rem);
 }
 
 @media (min-width: 520px) {
@@ -823,6 +829,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+  max-height: 100%;
   width: 100%;
 }
 
@@ -830,7 +837,7 @@ body {
   width: auto;
   max-width: 100%;
   height: auto;
-  max-height: clamp(2.75rem, 7.5vw, 3.875rem);
+  max-height: 100%;
   object-fit: contain;
 }
 
