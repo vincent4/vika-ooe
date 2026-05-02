@@ -811,10 +811,12 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  overflow: hidden;
+  box-sizing: border-box;
+  min-height: 0;
   max-width: 100%;
   margin-inline: 0;
-  /* max-height sættes fra JS ≈ .feat-copy højde; fallback før måling */
+  /* højde + max-height sættes fra JS; fallback før måling */
+  height: clamp(6rem, 28vw, 14rem);
   max-height: clamp(6rem, 28vw, 14rem);
 }
 
@@ -829,16 +831,23 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+  box-sizing: border-box;
+  min-height: 0;
   max-height: 100%;
+  height: 100%;
   width: 100%;
 }
 
 .feature-card.feature-card--img-above .feat-img img {
+  display: block;
+  box-sizing: border-box;
+  min-height: 0;
   width: auto;
   max-width: 100%;
   height: auto;
   max-height: 100%;
   object-fit: contain;
+  object-position: center center;
 }
 
 .feature-card .feat-img a {

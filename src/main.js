@@ -16,7 +16,10 @@ function setupImgAboveCards() {
 
     const sync = () => {
       const h = Math.ceil(copy.getBoundingClientRect().height);
-      if (h > 0) imgBox.style.maxHeight = `${h}px`;
+      if (h > 0) {
+        imgBox.style.height = `${h}px`;
+        imgBox.style.maxHeight = `${h}px`;
+      }
     };
 
     const ro = new ResizeObserver(sync);
