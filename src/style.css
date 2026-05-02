@@ -786,6 +786,10 @@ body {
     grid-template-columns: minmax(0, clamp(7rem, 22vw, 11rem)) minmax(0, 1fr);
     align-items: start;
   }
+
+  .feature-card.feature-card--img-above:has(.feat-img) {
+    grid-template-columns: 1fr;
+  }
 }
 
 .feature-card .feat-img {
@@ -800,6 +804,18 @@ body {
   .feature-card:has(.feat-img) .feat-img {
     max-width: min(100%, 11rem);
     margin-inline: auto;
+  }
+}
+
+.feature-card.feature-card--img-above .feat-img {
+  max-width: 100%;
+  margin-inline: 0;
+}
+
+@media (min-width: 520px) {
+  .feature-card.feature-card--img-above .feat-img {
+    max-width: 100%;
+    margin-inline: 0;
   }
 }
 
