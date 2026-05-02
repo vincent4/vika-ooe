@@ -795,7 +795,7 @@ body {
 .feature-card .feat-img {
   border-radius: var(--radius);
   overflow: hidden;
-  background: #ebe6df;
+  background: transparent;
   max-width: min(100%, 12rem);
   margin-inline: auto;
 }
