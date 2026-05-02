@@ -782,13 +782,14 @@ body {
 }
 
 @media (min-width: 520px) {
-  .feature-card:has(.feat-img) {
+  .feature-card:has(.feat-img):not(.feature-card--img-above) {
     grid-template-columns: minmax(0, clamp(7rem, 22vw, 11rem)) minmax(0, 1fr);
-    align-items: start;
+    align-items: center;
   }
 
   .feature-card.feature-card--img-above:has(.feat-img) {
     grid-template-columns: 1fr;
+    align-items: stretch;
   }
 }
 
