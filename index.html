@@ -1,18 +1,6 @@
 <!DOCTYPE html>
 <html lang="da">
   <head>
-    <script>
-      (function () {
-        try {
-          var seg = location.pathname.split("/").filter(Boolean)[0];
-          if (seg && (seg.toLowerCase() === "de" || seg.toLowerCase() === "en")) {
-            var b = document.createElement("base");
-            b.href = location.origin + "/";
-            document.head.prepend(b);
-          }
-        } catch (e) {}
-      })();
-    </script>
     <meta charset="UTF-8" />
     <meta
       name="viewport"
@@ -34,7 +22,7 @@
     <a class="skip-link" href="#main" data-i18n="skipLink">Spring til indhold</a>
     <header class="site-header">
       <div class="container header-inner">
-        <a class="brand" href="./">
+        <a class="brand" href="/">
           <img
             src="https://ooe.dk/wp-content/uploads/2020/04/ooe-logo2-160x239.png"
             width="160"
@@ -87,7 +75,7 @@
             <li>
               <a
                 class="lang-link lang-link--default"
-                href="./"
+                href="/"
                 data-lang-link="da"
                 title="Dansk"
                 lang="da"
@@ -103,7 +91,7 @@
               </a>
             </li>
             <li>
-              <a class="lang-link" href="./de/" data-lang-link="de" title="Deutsch" lang="de">
+              <a class="lang-link" href="/de/" data-lang-link="de" title="Deutsch" lang="de">
                 <span class="lang-flag" aria-hidden="true">
                   <svg class="lang-flag-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 5 3" focusable="false">
                     <rect fill="#000" width="5" height="1" />
@@ -115,7 +103,7 @@
               </a>
             </li>
             <li>
-              <a class="lang-link" href="./en/" data-lang-link="en" title="English" lang="en">
+              <a class="lang-link" href="/en/" data-lang-link="en" title="English" lang="en">
                 <span class="lang-flag" aria-hidden="true">
                   <svg class="lang-flag-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 30" focusable="false">
                     <path fill="#012169" d="M0 0h60v30H0z" />

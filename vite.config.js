@@ -2,9 +2,8 @@ import { defineConfig } from "vite";
 
 export default defineConfig({
   root: ".",
-  // Relative asset-stier (./assets/…). På /de/ og /en/ indsættes <base href="…/"> i index.html,
-  // så CSS/JS stadig hentes fra roden (se inline script øverst i <head>).
-  base: "./",
+  // Rod-relative /assets/… virker på /, /de/ og /en/ (./assets fejler under /de/).
+  base: "/",
   plugins: [
     {
       name: "serve-de-locale",
