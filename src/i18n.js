@@ -1,4 +1,4 @@
-/** @typedef {'da' | 'de'} Locale */
+/** @typedef {'da' | 'de' | 'en'} Locale */
 
 const STRINGS = {
   da: {
@@ -130,14 +130,82 @@ const STRINGS = {
     zoomHint: "Klicken für größeres Bild",
     honeypotLabel: "Leer lassen",
   },
+  en: {
+    pageTitle: "Embroidery | Cross-stitch | Knitting yarn | Oehlenschläger – OOE",
+    metaDescription:
+      "O. Oehlenschlägers Eftf. ApS – OOE embroidery, embroidery kits, yarns, fabrics and wholesale accessories.",
+    skipLink: "Skip to content",
+    navAria: "Main menu",
+    navBroderier: "Embroidery",
+    navStof: "Fabric",
+    navGarn: "Yarn",
+    navBroderigarn: "Embroidery yarn",
+    navStrikkegarn: "Knitting yarn",
+    navTilbehoer: "Accessories",
+    navKontakt: "Contact",
+    instagramAria: "OOE on Instagram",
+    langSwitchAria: "Choose language",
+    navToggleOpen: "Open menu",
+    navToggleClose: "Close menu",
+    introLead:
+      "We are a modern company that designs, manufactures and sells OOE embroidery and related products for the wholesale market.<br />Our range includes embroidery kits, yarns, fabrics and accessories.<br />We aim to be a reliable partner delivering quality products and creating value for our customers.",
+    kickerUdvalg: "Selection",
+    hBroderier: "Embroidery kits and motifs",
+    hPuder: "Cross-stitch cushions and motifs",
+    kickerForar: "Spring",
+    hForar: "Spring feelings",
+    hSeOgsaa: "See also",
+    featEmbroideryTitle: "Embroidery yarns for every project",
+    featEmbroideryP1:
+      "You’ll find embroidery yarn for all kinds of projects. Alongside our own beautiful single-strand cotton we carry the full embroidery yarn ranges from DMC and Anchor.",
+    featEmbroideryLink: "See more at ooe.dk",
+    featSchoppelTitle: "Schoppel-Wolle – innovative knitting yarns",
+    featSchoppelP1:
+      "In Denmark we are proud to be a wholesale partner for Schoppel-Wolle, a world-renowned producer of innovative and distinctive knitting yarns. Beyond the yarns shown here we offer many other exciting options.",
+    featSchoppelLink: "More yarns – click here",
+    featStofTitle: "OOE embroidery fabrics",
+    featStofP1:
+      "Our OOE embroidery fabrics are carefully sourced from leading European mills and combine high quality, beautiful texture and outstanding durability. We offer linen, Aida, even-weave and more—for traditional and modern embroidery projects alike.",
+    featStofLink: "See more at ooe.dk",
+    featTilbehorTitle: "Embroidery accessories",
+    featTilbehorP1: "We carry scissors, needles, hoops, yarn storage and more.",
+    featTilbehorLink: "See more at ooe.dk",
+    hInspiration: "Embroidery in larger formats",
+    showcaseA1: "Embroidered on 10-thread linen (OOE1428)<br />with DMC Mouliné yarn.",
+    showcaseA2: "<em>no. 52005,</em> <em>size 20×50 cm.</em>",
+    showcaseA3: "—",
+    showcaseA4: "Embroidered on 5.4 Aida (OOE414)<br />with DMC Mouliné yarn.",
+    showcaseA5: "<em>no. 52006,</em> <em>size 30×40 cm.</em>",
+    showcaseB1: "Embroidered on 10-thread linen (OOE1428)<br />with DMC Mouliné yarn.",
+    showcaseB2: "<em>no. 50139, size 20×50 cm.</em>",
+    showcaseC1: "Embroidered on 10-thread linen (OOE1428)<br />with DMC Mouliné yarn.",
+    showcaseC2: "<em>no. 21319, size 20×50 cm.</em>",
+    contactH2: "Write to us",
+    contactIntro:
+      "You can also call <strong>+45 86 88 36 70</strong> or email <a href=\"mailto:ooe@ooe.dk\">ooe@ooe.dk</a>. The form below requires hosting with Netlify Forms to work automatically.",
+    labelName: "Name",
+    labelEmail: "Email",
+    labelMessage: "Message",
+    submitBtn: "Send",
+    footerAbout: "About us at ooe.dk",
+    footerGdpr: "Privacy policy (GDPR)",
+    footerRest:
+      "O. Oehlenschlägers Eftf. ApS. Content and images belong to OOE; this page is a new layout based on the public website.",
+    zoomHint: "Click for larger image",
+    honeypotLabel: "Leave blank",
+  },
 };
 
 /** @returns {Locale} */
 export function getLocale() {
-  const path = location.pathname.replace(/\/index\.html$/i, "");
-  if (/\/de\/?$/i.test(path) || path.endsWith("/de")) return "de";
+  const pathOnly = location.pathname.replace(/\/index\.html$/i, "");
+  const segments = pathOnly.split("/").filter(Boolean);
+  const lastSeg = segments[segments.length - 1]?.toLowerCase();
+  if (lastSeg === "de") return "de";
+  if (lastSeg === "en") return "en";
   const q = new URLSearchParams(location.search).get("lang");
   if (q === "de") return "de";
+  if (q === "en") return "en";
   return "da";
 }
 
@@ -187,12 +255,18 @@ export function applyI18n() {
   const baseNorm = base.endsWith("/") ? base : `${base}/`;
   const homeDa = `${baseNorm}`;
   const homeDe = `${baseNorm}de/`;
+  const homeEn = `${baseNorm}en/`;
 
   const brand = document.querySelector(".brand");
-  if (brand) brand.setAttribute("href", lang === "de" ? homeDe : homeDa);
+  if (brand) {
+    if (lang === "de") brand.setAttribute("href", homeDe);
+    else if (lang === "en") brand.setAttribute("href", homeEn);
+    else brand.setAttribute("href", homeDa);
+  }
 
   const langDa = document.querySelector('[data-lang-link="da"]');
   const langDe = document.querySelector('[data-lang-link="de"]');
+  const langEn = document.querySelector('[data-lang-link="en"]');
   if (langDa) {
     langDa.setAttribute("href", homeDa);
     langDa.classList.toggle("lang-link--default", lang === "da");
@@ -200,6 +274,10 @@ export function applyI18n() {
   if (langDe) {
     langDe.setAttribute("href", homeDe);
     langDe.classList.toggle("lang-link--default", lang === "de");
+  }
+  if (langEn) {
+    langEn.setAttribute("href", homeEn);
+    langEn.classList.toggle("lang-link--default", lang === "en");
   }
 
   const lead = document.querySelector(".intro .lead");

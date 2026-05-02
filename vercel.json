@@ -6,6 +6,8 @@
   "installCommand": "npm install",
   "rewrites": [
     { "source": "/de", "destination": "/index.html?lang=de" },
-    { "source": "/de/", "destination": "/index.html?lang=de" }
+    { "source": "/de/", "destination": "/index.html?lang=de" },
+    { "source": "/en", "destination": "/index.html?lang=en" },
+    { "source": "/en/", "destination": "/index.html?lang=en" }
   ]
 }
