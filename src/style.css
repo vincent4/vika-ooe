@@ -604,12 +604,26 @@ body {
 }
 
 .intro h1 {
-  margin: 0 0 0.75rem;
+  margin: 0 0 0.35rem;
   font-family: var(--font-display);
   font-size: clamp(2rem, 4.5vw, 2.85rem);
   font-weight: 600;
   letter-spacing: 0.01em;
   color: var(--color-text);
+}
+
+.intro .intro-tagline {
+  margin: 0 0 0.85rem;
+  font-family: var(--font-display);
+  font-size: 2rem;
+  font-weight: 700;
+  line-height: 1.25;
+  letter-spacing: 0.01em;
+  color: var(--color-text);
+  max-width: 100%;
+  hyphens: auto;
+  -webkit-hyphens: auto;
+  overflow-wrap: break-word;
 }
 
 .intro .lead {

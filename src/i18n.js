@@ -20,6 +20,8 @@ const STRINGS = {
     navToggleClose: "Luk menu",
     introLead:
       "Vi er en moderne virksomhed, der designer, producerer og sælger OOE-broderier samt relaterede produkter til engrosmarkedet.<br />Vores sortiment omfatter broderipakninger, garner, stoffer og tilbehør.<br />Vi stræber efter at være en pålidelig partner, der leverer kvalitetsprodukter og skaber værdi for vores kunder.",
+    introTagline:
+      "Broderier, stoffer, garner og tilbehør til forhandlere og engroskunder.",
     kickerUdvalg: "Udvalg",
     hBroderier: "Broderipakninger og motiver",
     hPuder: "Korsstingspuder og motiver",
@@ -84,6 +86,8 @@ const STRINGS = {
     navToggleClose: "Menü schließen",
     introLead:
       "Wir sind ein modernes Unternehmen, das OOE-Stickereien sowie verwandte Produkte für den Großhandel entwirft, produziert und vertreibt.<br />Unser Sortiment umfasst Stickpackungen, Garne, Stoffe und Zubehör.<br />Wir möchten ein zuverlässiger Partner sein, der Qualitätsprodukte liefert und Mehrwert für unsere Kunden schafft.",
+    introTagline:
+      "Stickereien, Stoffe, Garne und Zubehör für Händler und Großhandelskunden.",
     kickerUdvalg: "Auswahl",
     hBroderier: "Stickpackungen und Motive",
     hPuder: "Kreuzstichkissen und Motive",
@@ -149,6 +153,8 @@ const STRINGS = {
     navToggleClose: "Close menu",
     introLead:
       "We are a modern company that designs, manufactures and sells OOE embroidery and related products for the wholesale market.<br />Our range includes embroidery kits, yarns, fabrics and accessories.<br />We aim to be a reliable partner delivering quality products and creating value for our customers.",
+    introTagline:
+      "Embroidery, fabrics, yarns and accessories for retailers and wholesale customers.",
     kickerUdvalg: "Selection",
     hBroderier: "Embroidery kits and motifs",
     hPuder: "Cross-stitch cushions and motifs",
@@ -281,5 +287,7 @@ export function applyI18n() {
   }
 
   const lead = document.querySelector(".intro .lead");
+  const introTagline = document.querySelector(".intro .intro-tagline");
   if (lead) lead.setAttribute("lang", lang);
+  if (introTagline) introTagline.setAttribute("lang", lang);
 }
