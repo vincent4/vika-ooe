@@ -38,6 +38,11 @@
         font-weight: 600;
         margin: 0 0 0.35rem;
       }
+      h2 {
+        font-size: 1.05rem;
+        margin: 0 0 0.75rem;
+        font-weight: 600;
+      }
       .sub {
         color: var(--muted);
         font-size: 0.9rem;
@@ -54,8 +59,10 @@
         display: block;
         font-weight: 500;
         margin-bottom: 0.35rem;
+        font-size: 0.9rem;
       }
       input[type="password"],
+      input[type="text"],
       textarea {
         width: 100%;
         font: inherit;
@@ -65,11 +72,14 @@
         background: #fff;
       }
       textarea {
-        min-height: 22rem;
-        font-family: ui-monospace, "Cascadia Code", Consolas, monospace;
-        font-size: 0.82rem;
+        min-height: 5rem;
         line-height: 1.45;
         resize: vertical;
+      }
+      textarea.json-raw {
+        min-height: 14rem;
+        font-family: ui-monospace, "Cascadia Code", Consolas, monospace;
+        font-size: 0.82rem;
       }
       .row {
         display: flex;
@@ -97,6 +107,15 @@
         background: transparent;
         color: var(--forest);
         border: 1px solid #c8e6d9;
+      }
+      .btn-small {
+        padding: 0.35rem 0.65rem;
+        font-size: 0.85rem;
+      }
+      .btn-danger {
+        background: transparent;
+        color: var(--err);
+        border: 1px solid #e8c9d0;
       }
       .msg {
         padding: 0.65rem 0.85rem;
@@ -127,6 +146,42 @@
         color: var(--muted);
         line-height: 1.45;
       }
+      details.section {
+        margin-bottom: 1.25rem;
+        border: 1px solid #e2dcd2;
+        border-radius: 8px;
+        padding: 0.65rem 0.85rem;
+        background: #faf8f5;
+      }
+      details.section summary {
+        cursor: pointer;
+        font-weight: 600;
+        color: var(--forest);
+      }
+      .item-block {
+        display: grid;
+        gap: 0.5rem;
+        margin-bottom: 0.85rem;
+        padding-bottom: 0.85rem;
+        border-bottom: 1px dashed #e2dcd2;
+      }
+      .item-block:last-child {
+        border-bottom: none;
+        margin-bottom: 0;
+        padding-bottom: 0;
+      }
+      .item-head {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 0.5rem;
+        flex-wrap: wrap;
+      }
+      .hint {
+        font-size: 0.82rem;
+        color: var(--muted);
+        margin: 0.35rem 0 0;
+      }
     </style>
   </head>
   <body>
@@ -134,14 +189,14 @@
       <p><a class="site-link" href="/">← Tilbage til websitet</a></p>
       <h1>Rediger indhold</h1>
       <p class="sub">
-        Her ændrer du <code>overrides.json</code> (tekster og billed-URL’er). Gem udløser et commit på GitHub —
-        du skal <strong>ikke</strong> logge ind med GitHub her.
+        Her ændrer du tekster og billed-URL’er som på websitet. <strong>Gem</strong> laver et commit — vent derefter et
+        øjeblik på at Vercel bygger igen.
       </p>
 
       <div id="login-panel" class="card">
         <p class="login-hint">
           Skriv den <strong>adgangskode</strong>, du har sat som miljøvariablen
-          <code>CMS_ADMIN_PASSWORD</code> på Vercel (Environment Variables). Ved forkert kode vises en
+          <code>CMS_ADMIN_PASSWORD</code> på Vercel. Ved forkert kode vises en
           <strong>rød besked lige herunder</strong>.
         </p>
         <div id="login-msg" class="msg err hidden" role="alert" aria-live="assertive"></div>
@@ -155,9 +210,52 @@
       <div id="editor-panel" class="hidden">
         <div id="msg" class="msg hidden" role="status" aria-live="polite"></div>
         <div class="card">
-          <label for="json">Indhold (JSON)</label>
-          <textarea id="json" spellcheck="false"></textarea>
-          <div class="row">
+          <h2>Indhold</h2>
+          <p class="hint">
+            Brug felterne nedenfor. Nøgle skal matche det, der står i koden (fx <code>introTagline</code>). HTML i
+            tekstfelter er tilladt, hvor siden bruger det.
+          </p>
+
+          <details class="section" open>
+            <summary>Danske tekster</summary>
+            <p class="hint">Tomme rækker gemmes ikke.</p>
+            <div id="rows-da"></div>
+            <button type="button" class="btn-ghost btn-small" id="add-da">+ Tilføj linje</button>
+          </details>
+
+          <details class="section">
+            <summary>Deutsche Texte</summary>
+            <div id="rows-de"></div>
+            <button type="button" class="btn-ghost btn-small" id="add-de">+ Zeile hinzufügen</button>
+          </details>
+
+          <details class="section">
+            <summary>English texts</summary>
+            <div id="rows-en"></div>
+            <button type="button" class="btn-ghost btn-small" id="add-en">+ Add line</button>
+          </details>
+
+          <details class="section">
+            <summary>Billeder</summary>
+            <p class="hint">ID skal matche <code>data-site-img</code> på websitet (fx <code>logo-header</code>).</p>
+            <div id="rows-img"></div>
+            <button type="button" class="btn-ghost btn-small" id="add-img">+ Tilføj billede</button>
+          </details>
+
+          <details class="section" id="raw-json-details">
+            <summary>Avanceret: rå JSON (kopier eller indsæt)</summary>
+            <p class="hint">
+              Gem bruger <strong>altid felterne ovenfor</strong>. Hvis du retter JSON her, skal du klikke
+              <strong>Anvend JSON til formular</strong> før Gem — ellers overskrives det af formularfeltene.
+            </p>
+            <label for="json">overrides.json</label>
+            <textarea id="json" class="json-raw" spellcheck="false"></textarea>
+            <div class="row">
+              <button type="button" class="btn-ghost" id="btn-apply-json">Anvend JSON → formular</button>
+            </div>
+          </details>
+
+          <div class="row" style="margin-top: 1.25rem">
             <button type="button" class="btn-primary" id="btn-save">Gem</button>
             <button type="button" class="btn-ghost" id="btn-reload">Genindlæs fra server</button>
             <button type="button" class="btn-ghost" id="btn-logout">Log ud</button>
@@ -179,6 +277,12 @@
       const btnSave = document.getElementById("btn-save");
       const btnReload = document.getElementById("btn-reload");
       const btnLogout = document.getElementById("btn-logout");
+      const btnApplyJson = document.getElementById("btn-apply-json");
+
+      const rowsDa = document.getElementById("rows-da");
+      const rowsDe = document.getElementById("rows-de");
+      const rowsEn = document.getElementById("rows-en");
+      const rowsImg = document.getElementById("rows-img");
 
       function showMsg(text, ok) {
         msgEl.textContent = text;
@@ -219,6 +323,75 @@
         return await res.text();
       }
 
+      function normalizeLocaleList(section) {
+        if (!section) return [];
+        if (Array.isArray(section)) {
+          return section.map((row) => ({
+            key: typeof row?.key === "string" ? row.key : "",
+            value: row?.value != null ? String(row.value) : "",
+          }));
+        }
+        if (typeof section === "object") {
+          return Object.entries(section).map(([key, value]) => ({
+            key,
+            value: value != null ? String(value) : "",
+          }));
+        }
+        return [];
+      }
+
+      function normalizeImagesList(section) {
+        if (!section) return [];
+        if (Array.isArray(section)) {
+          return section.map((row) => ({
+            id: typeof row?.id === "string" ? row.id : "",
+            thumbUrl: typeof row?.thumbUrl === "string" ? row.thumbUrl : "",
+            fullUrl: row?.fullUrl != null ? String(row.fullUrl) : "",
+          }));
+        }
+        if (typeof section === "object") {
+          return Object.entries(section).map(([id, v]) => {
+            if (typeof v === "string") return { id, thumbUrl: v, fullUrl: "" };
+            const o = v && typeof v === "object" ? v : {};
+            return {
+              id,
+              thumbUrl: typeof o.src === "string" ? o.src : "",
+              fullUrl: typeof o.href === "string" ? o.href : "",
+            };
+          });
+        }
+        return [];
+      }
+
+      function parseOverrides(raw) {
+        const obj = JSON.parse(raw);
+        return {
+          da: normalizeLocaleList(obj.da),
+          de: normalizeLocaleList(obj.de),
+          en: normalizeLocaleList(obj.en),
+          images: normalizeImagesList(obj.images),
+        };
+      }
+
+      function emptyOverrides() {
+        return { da: [], de: [], en: [], images: [] };
+      }
+
+      function toSaveShape(lists) {
+        return {
+          da: lists.da.filter((r) => r.key.trim() || r.value.trim()).map((r) => ({ key: r.key.trim(), value: r.value })),
+          de: lists.de.filter((r) => r.key.trim() || r.value.trim()).map((r) => ({ key: r.key.trim(), value: r.value })),
+          en: lists.en.filter((r) => r.key.trim() || r.value.trim()).map((r) => ({ key: r.key.trim(), value: r.value })),
+          images: lists.images
+            .filter((r) => r.id.trim() || r.thumbUrl.trim() || r.fullUrl.trim())
+            .map((r) => ({
+              id: r.id.trim(),
+              thumbUrl: r.thumbUrl.trim(),
+              fullUrl: r.fullUrl.trim(),
+            })),
+        };
+      }
+
       function validateStructure(obj) {
         return (
           obj &&
@@ -230,6 +403,128 @@
         );
       }
 
+      function clearRows(container) {
+        container.innerHTML = "";
+      }
+
+      function addKvRow(container, key, value) {
+        const wrap = document.createElement("div");
+        wrap.className = "item-block";
+        wrap.innerHTML = `
+          <div class="item-head">
+            <span style="font-size:0.85rem;color:var(--muted)">Nøgle / Key</span>
+            <button type="button" class="btn-danger btn-small btn-rm">Fjern</button>
+          </div>
+          <input type="text" class="kv-key" value="" autocomplete="off" />
+          <label>Tekst</label>
+          <textarea class="kv-val" rows="3"></textarea>
+        `;
+        wrap.querySelector(".kv-key").value = key;
+        wrap.querySelector(".kv-val").value = value;
+        wrap.querySelector(".btn-rm").addEventListener("click", () => wrap.remove());
+        container.appendChild(wrap);
+      }
+
+      function addImgRow(container, id, thumbUrl, fullUrl) {
+        const wrap = document.createElement("div");
+        wrap.className = "item-block";
+        wrap.innerHTML = `
+          <div class="item-head">
+            <span style="font-size:0.85rem;color:var(--muted)">Billede</span>
+            <button type="button" class="btn-danger btn-small btn-rm">Fjern</button>
+          </div>
+          <label>ID</label>
+          <input type="text" class="img-id" autocomplete="off" />
+          <label>Thumbnail-URL (billede på siden)</label>
+          <input type="text" class="img-thumb" autocomplete="off" />
+          <label>Lightbox-URL (valgfri)</label>
+          <input type="text" class="img-full" autocomplete="off" />
+        `;
+        wrap.querySelector(".img-id").value = id;
+        wrap.querySelector(".img-thumb").value = thumbUrl;
+        wrap.querySelector(".img-full").value = fullUrl;
+        wrap.querySelector(".btn-rm").addEventListener("click", () => wrap.remove());
+        container.appendChild(wrap);
+      }
+
+      function readListsFromDom() {
+        function readKv(container) {
+          const out = [];
+          container.querySelectorAll(".item-block").forEach((block) => {
+            const key = block.querySelector(".kv-key")?.value ?? "";
+            const value = block.querySelector(".kv-val")?.value ?? "";
+            out.push({ key, value });
+          });
+          return out;
+        }
+        const imgs = [];
+        rowsImg.querySelectorAll(".item-block").forEach((block) => {
+          imgs.push({
+            id: block.querySelector(".img-id")?.value ?? "",
+            thumbUrl: block.querySelector(".img-thumb")?.value ?? "",
+            fullUrl: block.querySelector(".img-full")?.value ?? "",
+          });
+        });
+        return {
+          da: readKv(rowsDa),
+          de: readKv(rowsDe),
+          en: readKv(rowsEn),
+          images: imgs,
+        };
+      }
+
+      function renderLists(lists) {
+        clearRows(rowsDa);
+        clearRows(rowsDe);
+        clearRows(rowsEn);
+        clearRows(rowsImg);
+        lists.da.forEach((r) => addKvRow(rowsDa, r.key, r.value));
+        lists.de.forEach((r) => addKvRow(rowsDe, r.key, r.value));
+        lists.en.forEach((r) => addKvRow(rowsEn, r.key, r.value));
+        lists.images.forEach((r) => addImgRow(rowsImg, r.id, r.thumbUrl, r.fullUrl));
+        if (lists.da.length === 0) addKvRow(rowsDa, "", "");
+        if (lists.de.length === 0) addKvRow(rowsDe, "", "");
+        if (lists.en.length === 0) addKvRow(rowsEn, "", "");
+        if (lists.images.length === 0) addImgRow(rowsImg, "", "", "");
+        syncTextareaFromLists(lists);
+      }
+
+      function syncTextareaFromLists(lists) {
+        const save = toSaveShape(lists);
+        ta.value = JSON.stringify(save, null, 2);
+      }
+
+      function applyJsonToForm() {
+        let parsed;
+        try {
+          parsed = JSON.parse(ta.value);
+        } catch (e) {
+          showMsg("JSON er ugyldigt: " + (e && e.message ? e.message : e), false);
+          return false;
+        }
+        try {
+          const lists = {
+            da: normalizeLocaleList(parsed.da),
+            de: normalizeLocaleList(parsed.de),
+            en: normalizeLocaleList(parsed.en),
+            images: normalizeImagesList(parsed.images),
+          };
+          renderLists(lists);
+          showMsg("JSON er lagt ind i formularerne.", true);
+          return true;
+        } catch (e) {
+          showMsg(String(e.message || e), false);
+          return false;
+        }
+      }
+
+      document.getElementById("add-da").addEventListener("click", () => addKvRow(rowsDa, "", ""));
+      document.getElementById("add-de").addEventListener("click", () => addKvRow(rowsDe, "", ""));
+      document.getElementById("add-en").addEventListener("click", () => addKvRow(rowsEn, "", ""));
+      document.getElementById("add-img").addEventListener("click", () => addImgRow(rowsImg, "", "", ""));
+
+      btnApplyJson.addEventListener("click", () => applyJsonToForm());
+
       async function showEditor() {
         clearLoginMsg();
         loginPanel.classList.add("hidden");
@@ -237,10 +532,11 @@
         clearMsg();
         try {
           const raw = await fetchOverridesText();
-          ta.value = JSON.stringify(JSON.parse(raw), null, 2);
+          const lists = parseOverrides(raw);
+          renderLists(lists);
         } catch (e) {
           showMsg(String(e.message || e), false);
-          ta.value = '{\n  "da": [],\n  "de": [],\n  "en": [],\n  "images": []\n}\n';
+          renderLists(emptyOverrides());
         }
       }
 
@@ -259,14 +555,12 @@
             showLoginMsg(
               "Serveren svarede uden gyldig JSON (status " +
                 res.status +
-                "). Tjek at du er på https://vika.ooe.dk og at /api/cms-login findes.",
+                "). Tjek at du er på det rigtige domæne og at /api/cms-login findes.",
             );
             return;
           }
           if (!res.ok) {
-            showLoginMsg(
-              data.error || "Login fejlede (HTTP " + res.status + ").",
-            );
+            showLoginMsg(data.error || "Login fejlede (HTTP " + res.status + ").");
             return;
           }
           if (!data.token) {
@@ -278,9 +572,7 @@
           await showEditor();
         } catch (e) {
           showLoginMsg(
-            "Netværksfejl: " +
-              (e && e.message ? e.message : "ukendt") +
-              ". Virker /api/cms-login fra denne adresse?",
+            "Netværksfejl: " + (e && e.message ? e.message : "ukendt") + ".",
           );
         }
       }
@@ -294,6 +586,10 @@
         clearToken();
         editorPanel.classList.add("hidden");
         loginPanel.classList.remove("hidden");
+        clearRows(rowsDa);
+        clearRows(rowsDe);
+        clearRows(rowsEn);
+        clearRows(rowsImg);
         ta.value = "";
         clearMsg();
         clearLoginMsg();
@@ -303,7 +599,8 @@
         clearMsg();
         try {
           const raw = await fetchOverridesText();
-          ta.value = JSON.stringify(JSON.parse(raw), null, 2);
+          const lists = parseOverrides(raw);
+          renderLists(lists);
           showMsg("Genindlæst.", true);
         } catch (e) {
           showMsg(String(e.message || e), false);
@@ -319,15 +616,10 @@
           showMsg("Ikke logget ind.", false);
           return;
         }
-        let parsed;
-        try {
-          parsed = JSON.parse(ta.value);
-        } catch (e) {
-          showMsg("JSON er ugyldigt: " + (e && e.message ? e.message : e), false);
-          return;
-        }
+        const lists = readListsFromDom();
+        const parsed = toSaveShape(lists);
         if (!validateStructure(parsed)) {
-          showMsg('Filen skal have nøglerne da, de, en og images — alle som arrays ([]).', false);
+          showMsg("Intern fejl: forventede arrays.", false);
           return;
         }
         saveInFlight = true;
@@ -348,6 +640,7 @@
             showMsg(data.error || "Gem fejlede (" + res.status + ")", false);
             return;
           }
+          syncTextareaFromLists(readListsFromDom());
           showMsg(
             "Gemt. Vercel bygger sitet på ny om lidt — vent et minut og genindlæs websitet.",
             true,
