@@ -1092,3 +1092,88 @@ body {
   font-size: 0.8125rem;
   opacity: 0.9;
 }
+
+/* ——— Visuel CMS (når logget ind via /rediger/) ——— */
+.ooe-edit-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 99999;
+  padding: 0.5rem max(0.75rem, env(safe-area-inset-left, 0px)) calc(0.5rem + env(safe-area-inset-bottom, 0px))
+    max(0.75rem, env(safe-area-inset-right, 0px));
+  background: rgba(47, 77, 68, 0.97);
+  color: #fff;
+  font-size: 0.875rem;
+  box-shadow: 0 -4px 24px rgba(0, 0, 0, 0.12);
+}
+
+.ooe-edit-bar__inner {
+  max-width: 52rem;
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem 0.75rem;
+}
+
+.ooe-edit-bar__hint {
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  margin-right: 0.25rem;
+}
+
+.ooe-edit-bar__btn {
+  padding: 0.45rem 0.85rem;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  border: 1px solid transparent;
+  background: rgba(255, 255, 255, 0.15);
+  color: #fff;
+}
+
+.ooe-edit-bar__btn:hover {
+  background: rgba(255, 255, 255, 0.25);
+}
+
+.ooe-edit-bar__btn--primary {
+  background: #c8e6d9;
+  color: var(--color-forest, #2f4d44);
+}
+
+.ooe-edit-bar__btn--primary:hover {
+  filter: brightness(1.05);
+}
+
+.ooe-edit-bar__btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.ooe-edit-bar__link {
+  color: #c8e6d9;
+  margin-left: auto;
+  font-weight: 500;
+}
+
+.ooe-edit-bar__link:hover {
+  color: #fff;
+}
+
+body.ooe-visual-mode [data-i18n],
+body.ooe-visual-mode [data-i18n-html] {
+  outline: 2px dashed rgba(47, 77, 68, 0.45);
+  outline-offset: 2px;
+  min-height: 1.2em;
+}
+
+body.ooe-visual-mode [data-site-img] {
+  outline: 3px solid rgba(200, 230, 217, 0.9);
+  outline-offset: 2px;
+  cursor: pointer;
+}
+
+body.ooe-visual-mode .glightbox {
+  cursor: pointer;
+}

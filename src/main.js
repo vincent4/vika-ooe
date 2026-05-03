@@ -3,6 +3,7 @@ import "glightbox/dist/css/glightbox.min.css";
 import "./style.css";
 import { applyI18n, t } from "./i18n.js";
 import { applySiteImages, fetchSiteOverrides } from "./site-overrides.js";
+import { initVisualEdit } from "./visual-edit.js";
 
 /** Schoppel-kort: billedramme får ca. samme højde som teksten under (sprog/resize) */
 function setupImgAboveCards() {
@@ -53,6 +54,8 @@ async function init() {
   });
 
   setupChromeNavYearScroll();
+
+  initVisualEdit();
 }
 
 function setupChromeNavYearScroll() {
