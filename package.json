@@ -4,8 +4,6 @@
   "version": "1.0.0",
   "type": "module",
   "scripts": {
-    "predev": "node scripts/copy-decap-admin.mjs",
-    "prebuild": "node scripts/copy-decap-admin.mjs",
     "dev": "vite",
     "start": "vite",
     "build": "vite build",

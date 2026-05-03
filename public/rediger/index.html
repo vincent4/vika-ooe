@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="da">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex" />
+    <title>OOE · Rediger indhold</title>
+    <style>
+      :root {
+        --bg: #f7f4ef;
+        --card: #fffefb;
+        --text: #2a2622;
+        --muted: #5e5850;
+        --forest: #2f4d44;
+        --err: #8b2942;
+        --ok: #2f4d44;
+        --radius: 10px;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        font-family: system-ui, "Segoe UI", Roboto, sans-serif;
+        font-size: 1rem;
+        line-height: 1.55;
+        color: var(--text);
+        background: var(--bg);
+        min-height: 100vh;
+      }
+      .wrap {
+        max-width: 52rem;
+        margin: 0 auto;
+        padding: 1.25rem clamp(1rem, 4vw, 2rem) 3rem;
+      }
+      h1 {
+        font-size: 1.35rem;
+        font-weight: 600;
+        margin: 0 0 0.35rem;
+      }
+      .sub {
+        color: var(--muted);
+        font-size: 0.9rem;
+        margin-bottom: 1.5rem;
+      }
+      .card {
+        background: var(--card);
+        border-radius: var(--radius);
+        padding: 1.25rem 1.35rem;
+        box-shadow: 0 8px 32px rgba(42, 38, 34, 0.08);
+        margin-bottom: 1rem;
+      }
+      label {
+        display: block;
+        font-weight: 500;
+        margin-bottom: 0.35rem;
+      }
+      input[type="password"],
+      textarea {
+        width: 100%;
+        font: inherit;
+        padding: 0.55rem 0.65rem;
+        border: 1px solid #e2dcd2;
+        border-radius: 8px;
+        background: #fff;
+      }
+      textarea {
+        min-height: 22rem;
+        font-family: ui-monospace, "Cascadia Code", Consolas, monospace;
+        font-size: 0.82rem;
+        line-height: 1.45;
+        resize: vertical;
+      }
+      .row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.65rem;
+        align-items: center;
+        margin-top: 0.85rem;
+      }
+      button {
+        font: inherit;
+        cursor: pointer;
+        border: none;
+        border-radius: 8px;
+        padding: 0.55rem 1rem;
+        font-weight: 600;
+      }
+      .btn-primary {
+        background: var(--forest);
+        color: #fff;
+      }
+      .btn-primary:hover {
+        filter: brightness(1.06);
+      }
+      .btn-ghost {
+        background: transparent;
+        color: var(--forest);
+        border: 1px solid #c8e6d9;
+      }
+      .msg {
+        padding: 0.65rem 0.85rem;
+        border-radius: 8px;
+        font-size: 0.9rem;
+        margin-bottom: 1rem;
+      }
+      .msg.err {
+        background: #fdeef1;
+        color: var(--err);
+      }
+      .msg.ok {
+        background: #e8f5ef;
+        color: var(--ok);
+      }
+      .hidden {
+        display: none !important;
+      }
+      a.site-link {
+        color: var(--forest);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <p><a class="site-link" href="/">← Tilbage til websitet</a></p>
+      <h1>Rediger indhold</h1>
+      <p class="sub">
+        Her ændrer du <code>overrides.json</code> (tekster og billed-URL’er). Gem udløser et commit på GitHub —
+        du skal <strong>ikke</strong> logge ind med GitHub her.
+      </p>
+
+      <div id="login-panel" class="card">
+        <label for="pw">Adgangskode</label>
+        <input type="password" id="pw" autocomplete="current-password" />
+        <div class="row">
+          <button type="button" class="btn-primary" id="btn-login">Log ind</button>
+        </div>
+      </div>
+
+      <div id="editor-panel" class="hidden">
+        <div id="msg" class="msg hidden" role="alert"></div>
+        <div class="card">
+          <label for="json">Indhold (JSON)</label>
+          <textarea id="json" spellcheck="false"></textarea>
+          <div class="row">
+            <button type="button" class="btn-primary" id="btn-save">Gem</button>
+            <button type="button" class="btn-ghost" id="btn-reload">Genindlæs fra server</button>
+            <button type="button" class="btn-ghost" id="btn-logout">Log ud</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      const TOKEN_KEY = "ooe_cms_token";
+
+      const loginPanel = document.getElementById("login-panel");
+      const editorPanel = document.getElementById("editor-panel");
+      const pw = document.getElementById("pw");
+      const btnLogin = document.getElementById("btn-login");
+      const ta = document.getElementById("json");
+      const msgEl = document.getElementById("msg");
+      const btnSave = document.getElementById("btn-save");
+      const btnReload = document.getElementById("btn-reload");
+      const btnLogout = document.getElementById("btn-logout");
+
+      function showMsg(text, ok) {
+        msgEl.textContent = text;
+        msgEl.classList.remove("hidden", "err", "ok");
+        msgEl.classList.add(ok ? "ok" : "err");
+      }
+
+      function clearMsg() {
+        msgEl.classList.add("hidden");
+        msgEl.textContent = "";
+      }
+
+      function getToken() {
+        return sessionStorage.getItem(TOKEN_KEY);
+      }
+
+      function setToken(t) {
+        sessionStorage.setItem(TOKEN_KEY, t);
+      }
+
+      function clearToken() {
+        sessionStorage.removeItem(TOKEN_KEY);
+      }
+
+      async function fetchOverridesText() {
+        const res = await fetch("/content/overrides.json", { cache: "no-store" });
+        if (!res.ok) throw new Error("Kunne ikke hente overrides.json (" + res.status + ")");
+        return await res.text();
+      }
+
+      function validateStructure(obj) {
+        return (
+          obj &&
+          typeof obj === "object" &&
+          Array.isArray(obj.da) &&
+          Array.isArray(obj.de) &&
+          Array.isArray(obj.en) &&
+          Array.isArray(obj.images)
+        );
+      }
+
+      async function showEditor() {
+        loginPanel.classList.add("hidden");
+        editorPanel.classList.remove("hidden");
+        clearMsg();
+        try {
+          const raw = await fetchOverridesText();
+          ta.value = JSON.stringify(JSON.parse(raw), null, 2);
+        } catch (e) {
+          showMsg(String(e.message || e), false);
+          ta.value = '{\n  "da": [],\n  "de": [],\n  "en": [],\n  "images": []\n}\n';
+        }
+      }
+
+      async function doLogin() {
+        clearMsg();
+        try {
+          const res = await fetch("/api/cms-login", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ password: pw.value }),
+          });
+          const data = await res.json().catch(() => ({}));
+          if (!res.ok) {
+            showMsg(data.error || "Login fejlede (" + res.status + ")", false);
+            return;
+          }
+          if (!data.token) {
+            showMsg("Uventet svar fra server.", false);
+            return;
+          }
+          setToken(data.token);
+          pw.value = "";
+          await showEditor();
+        } catch (e) {
+          showMsg(
+            "Kan ikke kontakte API (virker kun på Vercel med miljøvariabler). " +
+              (e && e.message ? e.message : ""),
+            false,
+          );
+        }
+      }
+
+      btnLogin.addEventListener("click", doLogin);
+      pw.addEventListener("keydown", (e) => {
+        if (e.key === "Enter") doLogin();
+      });
+
+      btnLogout.addEventListener("click", () => {
+        clearToken();
+        editorPanel.classList.add("hidden");
+        loginPanel.classList.remove("hidden");
+        ta.value = "";
+        clearMsg();
+      });
+
+      btnReload.addEventListener("click", async () => {
+        clearMsg();
+        try {
+          const raw = await fetchOverridesText();
+          ta.value = JSON.stringify(JSON.parse(raw), null, 2);
+          showMsg("Genindlæst.", true);
+        } catch (e) {
+          showMsg(String(e.message || e), false);
+        }
+      });
+
+      btnSave.addEventListener("click", async () => {
+        clearMsg();
+        const token = getToken();
+        if (!token) {
+          showMsg("Ikke logget ind.", false);
+          return;
+        }
+        let parsed;
+        try {
+          parsed = JSON.parse(ta.value);
+        } catch (e) {
+          showMsg("JSON er ugyldigt: " + (e && e.message ? e.message : e), false);
+          return;
+        }
+        if (!validateStructure(parsed)) {
+          showMsg('Filen skal have nøglerne da, de, en og images — alle som arrays ([]).', false);
+          return;
+        }
+        try {
+          const res = await fetch("/api/cms-save-overrides", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: "Bearer " + token,
+            },
+            body: JSON.stringify({ overrides: parsed }),
+          });
+          const data = await res.json().catch(() => ({}));
+          if (!res.ok) {
+            showMsg(data.error || "Gem fejlede (" + res.status + ")", false);
+            return;
+          }
+          showMsg("Gemt. Et nyt deploy starter på Vercel om lidt.", true);
+        } catch (e) {
+          showMsg(String(e.message || e), false);
+        }
+      });
+
+      (async function init() {
+        if (getToken()) {
+          await showEditor();
+        }
+      })();
+    </script>
+  </body>
+</html>

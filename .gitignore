@@ -26,6 +26,3 @@ build/
 
 # Vercel CLI (lokalt link — ikke commit)
 .vercel/
-
-# Genereres ved npm run dev/build (scripts/copy-decap-admin.mjs)
-public/admin/decap-cms.js
