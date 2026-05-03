@@ -22,8 +22,8 @@ export default async function handler(req, res) {
     return res.status(405).json({ error: "Method not allowed" });
   }
 
-  const jwtSecret = process.env.CMS_JWT_SECRET;
-  const adminPassword = process.env.CMS_ADMIN_PASSWORD;
+  const jwtSecret = (process.env.CMS_JWT_SECRET ?? "").trim();
+  const adminPassword = (process.env.CMS_ADMIN_PASSWORD ?? "").trim();
   if (!jwtSecret || !adminPassword) {
     return res.status(503).json({
       error: "CMS er ikke konfigureret (mangler CMS_JWT_SECRET eller CMS_ADMIN_PASSWORD på Vercel).",
@@ -32,9 +32,13 @@ export default async function handler(req, res) {
 
   const body = parseJsonBody(req);
 
-  const password = typeof body.password === "string" ? body.password : "";
+  const password =
+    typeof body.password === "string" ? body.password.trim() : "";
   if (!sha256Equal(password, adminPassword)) {
-    return res.status(401).json({ error: "Forkert adgangskode" });
+    return res.status(401).json({
+      error:
+        "Forkert adgangskode. Tjek at den matcher CMS_ADMIN_PASSWORD på Vercel (uden ekstra mellemrum).",
+    });
   }
 
   const ttlMs = 8 * 60 * 60 * 1000;

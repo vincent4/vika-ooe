@@ -36,8 +36,8 @@ export default async function handler(req, res) {
     return res.status(405).json({ error: "Method not allowed" });
   }
 
-  const jwtSecret = process.env.CMS_JWT_SECRET;
-  const ghToken = process.env.GITHUB_TOKEN;
+  const jwtSecret = (process.env.CMS_JWT_SECRET ?? "").trim();
+  const ghToken = (process.env.GITHUB_TOKEN ?? "").trim();
   if (!jwtSecret || !ghToken) {
     return res.status(503).json({
       error: "CMS er ikke konfigureret (mangler CMS_JWT_SECRET eller GITHUB_TOKEN på Vercel).",

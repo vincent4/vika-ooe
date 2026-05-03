@@ -129,6 +129,8 @@
         du skal <strong>ikke</strong> logge ind med GitHub her.
       </p>
 
+      <div id="msg" class="msg hidden" role="alert"></div>
+
       <div id="login-panel" class="card">
         <label for="pw">Adgangskode</label>
         <input type="password" id="pw" autocomplete="current-password" />
@@ -138,7 +140,6 @@
       </div>
 
       <div id="editor-panel" class="hidden">
-        <div id="msg" class="msg hidden" role="alert"></div>
         <div class="card">
           <label for="json">Indhold (JSON)</label>
           <textarea id="json" spellcheck="false"></textarea>
@@ -223,7 +224,7 @@
           const res = await fetch("/api/cms-login", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ password: pw.value }),
+            body: JSON.stringify({ password: pw.value.trim() }),
           });
           const data = await res.json().catch(() => ({}));
           if (!res.ok) {
