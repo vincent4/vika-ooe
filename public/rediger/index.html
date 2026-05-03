@@ -270,7 +270,9 @@
         }
       });
 
+      let saveInFlight = false;
       btnSave.addEventListener("click", async () => {
+        if (saveInFlight) return;
         clearMsg();
         const token = getToken();
         if (!token) {
@@ -288,6 +290,10 @@
           showMsg('Filen skal have nøglerne da, de, en og images — alle som arrays ([]).', false);
           return;
         }
+        saveInFlight = true;
+        btnSave.disabled = true;
+        const saveLabel = btnSave.textContent;
+        btnSave.textContent = "Gemmer…";
         try {
           const res = await fetch("/api/cms-save-overrides", {
             method: "POST",
@@ -302,9 +308,16 @@
             showMsg(data.error || "Gem fejlede (" + res.status + ")", false);
             return;
           }
-          showMsg("Gemt. Et nyt deploy starter på Vercel om lidt.", true);
+          showMsg(
+            "Gemt. Vercel bygger sitet på ny om lidt — vent et minut og genindlæs websitet.",
+            true,
+          );
         } catch (e) {
           showMsg(String(e.message || e), false);
+        } finally {
+          saveInFlight = false;
+          btnSave.disabled = false;
+          btnSave.textContent = saveLabel;
         }
       });
 
