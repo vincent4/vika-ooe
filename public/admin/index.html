@@ -7,11 +7,8 @@
     <title>OOE – indhold (admin)</title>
   </head>
   <body>
-    <!--
-      Admin: Decap CMS med GitHub-login (bruger med skriveadgang til repo ændrer public/content/overrides.json).
-      Opsæt GitHub OAuth-app som beskrevet her: https://decapcms.org/docs/github-backend/
-    -->
-    <!-- Pin ikke til @3.4.x — den findes ikke på CDN (giver tom side). Brug semver som i Decap-docs. -->
-    <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
+    <!-- Decap læses fra samme domæne (/admin/decap-cms.js), kopieres ved npm run dev/build — se scripts/copy-decap-admin.mjs -->
+    <noscript>Aktivér JavaScript for at bruge indholds-administration.</noscript>
+    <script src="./decap-cms.js"></script>
   </body>
 </html>

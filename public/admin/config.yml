@@ -6,7 +6,6 @@ backend:
   repo: vincent4/vika-ooe
   branch: main
 
-# Uploadede filer fra CMS havner i repo under public/uploads (URL /uploads/…)
 media_folder: public/uploads
 public_folder: /uploads
 
@@ -19,7 +18,7 @@ collections:
         file: public/content/overrides.json
         format: json
         fields:
-          - label: Danske tekster (overskriver standard — nøgle som i i18n, fx introTagline)
+          - label: "Danske tekster (valgfri overrides — nøgle som i i18n, fx introTagline)"
             name: da
             widget: list
             summary: "{{fields.key}}"
@@ -40,16 +39,14 @@ collections:
             fields:
               - { label: Key, name: key, widget: string }
               - { label: Text, name: value, widget: text }
-          - label: Billeder (ID = data-site-img på siden)
+          - label: "Billeder (ID = data-site-img på siden)"
             name: images
             widget: list
             summary: "{{fields.id}}"
             fields:
               - { label: ID, name: id, widget: string }
-              - { label: Billede-URL (thumbnail / src), name: thumbUrl, widget: string }
-              - {
-                  label: Lightbox-URL (href — valgfri, tom = samme som thumbnail),
-                  name: fullUrl,
-                  widget: string,
-                  required: false,
-                }
+              - { label: "Billede-URL (thumbnail / src)", name: thumbUrl, widget: string }
+              - label: "Lightbox-URL (href, valgfri — tom = samme som thumbnail)"
+                name: fullUrl
+                widget: string
+                required: false
