@@ -6,6 +6,14 @@ backend:
   repo: vincent4/vika-ooe
   branch: main
 
+site_url: https://vika.ooe.dk
+display_url: https://vika.ooe.dk
+
+# Erstat Decaps login/header-logo med OOE (samme som på forsiden)
+logo:
+  src: https://ooe.dk/wp-content/uploads/2020/04/ooe-logo2-160x239.png
+  show_in_header: true
+
 media_folder: public/uploads
 public_folder: /uploads
 
