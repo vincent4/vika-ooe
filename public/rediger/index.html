@@ -118,6 +118,15 @@
       a.site-link {
         color: var(--forest);
       }
+      .login-hint {
+        margin: 0 0 1rem;
+        padding: 0.65rem 0.75rem;
+        background: rgba(47, 77, 68, 0.08);
+        border-radius: 8px;
+        font-size: 0.88rem;
+        color: var(--muted);
+        line-height: 1.45;
+      }
     </style>
   </head>
   <body>
@@ -129,9 +138,13 @@
         du skal <strong>ikke</strong> logge ind med GitHub her.
       </p>
 
-      <div id="msg" class="msg hidden" role="alert"></div>
-
       <div id="login-panel" class="card">
+        <p class="login-hint">
+          Skriv den <strong>adgangskode</strong>, du har sat som miljøvariablen
+          <code>CMS_ADMIN_PASSWORD</code> på Vercel (Environment Variables). Ved forkert kode vises en
+          <strong>rød besked lige herunder</strong>.
+        </p>
+        <div id="login-msg" class="msg err hidden" role="alert" aria-live="assertive"></div>
         <label for="pw">Adgangskode</label>
         <input type="password" id="pw" autocomplete="current-password" />
         <div class="row">
@@ -140,6 +153,7 @@
       </div>
 
       <div id="editor-panel" class="hidden">
+        <div id="msg" class="msg hidden" role="status" aria-live="polite"></div>
         <div class="card">
           <label for="json">Indhold (JSON)</label>
           <textarea id="json" spellcheck="false"></textarea>
@@ -161,6 +175,7 @@
       const btnLogin = document.getElementById("btn-login");
       const ta = document.getElementById("json");
       const msgEl = document.getElementById("msg");
+      const loginMsgEl = document.getElementById("login-msg");
       const btnSave = document.getElementById("btn-save");
       const btnReload = document.getElementById("btn-reload");
       const btnLogout = document.getElementById("btn-logout");
@@ -174,6 +189,16 @@
       function clearMsg() {
         msgEl.classList.add("hidden");
         msgEl.textContent = "";
+      }
+
+      function showLoginMsg(text) {
+        loginMsgEl.textContent = text;
+        loginMsgEl.classList.remove("hidden");
+      }
+
+      function clearLoginMsg() {
+        loginMsgEl.classList.add("hidden");
+        loginMsgEl.textContent = "";
       }
 
       function getToken() {
@@ -206,6 +231,7 @@
       }
 
       async function showEditor() {
+        clearLoginMsg();
         loginPanel.classList.add("hidden");
         editorPanel.classList.remove("hidden");
         clearMsg();
@@ -219,30 +245,42 @@
       }
 
       async function doLogin() {
-        clearMsg();
+        clearLoginMsg();
         try {
           const res = await fetch("/api/cms-login", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ password: pw.value.trim() }),
           });
-          const data = await res.json().catch(() => ({}));
+          let data = {};
+          try {
+            data = await res.json();
+          } catch {
+            showLoginMsg(
+              "Serveren svarede uden gyldig JSON (status " +
+                res.status +
+                "). Tjek at du er på https://vika.ooe.dk og at /api/cms-login findes.",
+            );
+            return;
+          }
           if (!res.ok) {
-            showMsg(data.error || "Login fejlede (" + res.status + ")", false);
+            showLoginMsg(
+              data.error || "Login fejlede (HTTP " + res.status + ").",
+            );
             return;
           }
           if (!data.token) {
-            showMsg("Uventet svar fra server.", false);
+            showLoginMsg("Uventet svar fra server (mangler token).");
             return;
           }
           setToken(data.token);
           pw.value = "";
           await showEditor();
         } catch (e) {
-          showMsg(
-            "Kan ikke kontakte API (virker kun på Vercel med miljøvariabler). " +
-              (e && e.message ? e.message : ""),
-            false,
+          showLoginMsg(
+            "Netværksfejl: " +
+              (e && e.message ? e.message : "ukendt") +
+              ". Virker /api/cms-login fra denne adresse?",
           );
         }
       }
@@ -258,6 +296,7 @@
         loginPanel.classList.remove("hidden");
         ta.value = "";
         clearMsg();
+        clearLoginMsg();
       });
 
       btnReload.addEventListener("click", async () => {
