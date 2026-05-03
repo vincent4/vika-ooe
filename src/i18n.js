@@ -61,6 +61,7 @@ const STRINGS = {
     labelMessage: "Besked",
     submitBtn: "Send",
     footerAbout: "Om os på ooe.dk",
+    footerAdminLogin: "Admin · rediger indhold",
     footerGdpr: "Persondatapolitik (GDPR)",
     footerRest:
       "O. Oehlenschlägers Eftf. ApS. Indhold og billeder tilhører OOE; denne side er et nyt layout baseret på det offentlige site.",
@@ -128,6 +129,7 @@ const STRINGS = {
     labelMessage: "Nachricht",
     submitBtn: "Senden",
     footerAbout: "Über uns auf ooe.dk",
+    footerAdminLogin: "Admin · Inhalt bearbeiten",
     footerGdpr: "Datenschutz (DSGVO)",
     footerRest:
       "O. Oehlenschlägers Eftf. ApS. Inhalt und Bilder gehören OOE; diese Seite ist ein neues Layout auf Basis der öffentlichen Website.",
@@ -194,6 +196,7 @@ const STRINGS = {
     labelMessage: "Message",
     submitBtn: "Send",
     footerAbout: "About us at ooe.dk",
+    footerAdminLogin: "Admin · edit content",
     footerGdpr: "Privacy policy (GDPR)",
     footerRest:
       "O. Oehlenschlägers Eftf. ApS. Content and images belong to OOE; this page is a new layout based on the public website.",
@@ -217,18 +220,27 @@ export function getLocale() {
 
 let activeLang = "da";
 
+/** Bundne strenge for aktivt sprog (defaults + evt. overrides fra content/overrides.json). */
+let currentTable = /** @type {Record<string, string>} */ ({ ...STRINGS.da });
+
 /** @param {string} key */
 export function t(key) {
-  const table = STRINGS[activeLang] ?? STRINGS.da;
-  return table[key] ?? STRINGS.da[key] ?? key;
+  return currentTable[key] ?? STRINGS.da[key] ?? key;
 }
 
-export function applyI18n() {
+/**
+ * @param {Partial<Record<Locale, Record<string, string>>> | null} localePatches
+ * Valgfrie felter pr. sprog — samme nøgler som i STRINGS (fx introTagline).
+ */
+export function applyI18n(localePatches = null) {
   activeLang = getLocale();
   const lang = activeLang;
   document.documentElement.lang = lang;
 
-  const table = STRINGS[lang] ?? STRINGS.da;
+  const defaults = STRINGS[lang] ?? STRINGS.da;
+  const patch = localePatches?.[lang] ?? {};
+  currentTable = { ...defaults, ...patch };
+  const table = currentTable;
   document.title = table.pageTitle;
   const metaDesc = document.querySelector('meta[name="description"]');
   if (metaDesc) metaDesc.setAttribute("content", table.metaDescription);

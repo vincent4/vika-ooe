@@ -1,0 +1,55 @@
+# Decap CMS — rediger public/content/overrides.json via GitHub.
+# Kræver OAuth-app (se https://decapcms.org/docs/github-backend/).
+
+backend:
+  name: github
+  repo: vincent4/vika-ooe
+  branch: main
+
+# Uploadede filer fra CMS havner i repo under public/uploads (URL /uploads/…)
+media_folder: public/uploads
+public_folder: /uploads
+
+collections:
+  - name: site
+    label: Website
+    files:
+      - label: Tekster og billeder
+        name: overrides
+        file: public/content/overrides.json
+        format: json
+        fields:
+          - label: Danske tekster (overskriver standard — nøgle som i i18n, fx introTagline)
+            name: da
+            widget: list
+            summary: "{{fields.key}}"
+            fields:
+              - { label: Nøgle, name: key, widget: string }
+              - { label: Tekst, name: value, widget: text }
+          - label: Deutsche Texte
+            name: de
+            widget: list
+            summary: "{{fields.key}}"
+            fields:
+              - { label: Schlüssel, name: key, widget: string }
+              - { label: Text, name: value, widget: text }
+          - label: English texts
+            name: en
+            widget: list
+            summary: "{{fields.key}}"
+            fields:
+              - { label: Key, name: key, widget: string }
+              - { label: Text, name: value, widget: text }
+          - label: Billeder (ID = data-site-img på siden)
+            name: images
+            widget: list
+            summary: "{{fields.id}}"
+            fields:
+              - { label: ID, name: id, widget: string }
+              - { label: Billede-URL (thumbnail / src), name: thumbUrl, widget: string }
+              - {
+                  label: Lightbox-URL (href — valgfri, tom = samme som thumbnail),
+                  name: fullUrl,
+                  widget: string,
+                  required: false,
+                }
